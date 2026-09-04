@@ -38,7 +38,10 @@ FINOVATE_ERP_X/
 │   ├── companies.js       # Companies & Branches Management
 │   ├── customers.js       # Customer Relationship Management
 │   ├── suppliers.js       # Supplier Relationship Management
-│   └── products.js        # Products & Inventory Management
+│   ├── products.js        # Products & Inventory Management
+│   ├── sales.js           # Sales & Invoicing System
+│   ├── pos.js             # Point of Sale (POS) System
+│   └── purchasing.js      # Purchasing & Procurement
 │
 ├── locales/               # Language Files (36 files)
 │   ├── ar.json           # Arabic (RTL)
@@ -85,8 +88,8 @@ Arabic, English, French, Spanish, German, Italian, Portuguese, Turkish, Russian,
 - [x] Phase 03: Company + Branches Management
 - [x] Phase 04: Customers + Suppliers (CRM)
 - [x] Phase 05: Products + Inventory + Warehouses
-- [ ] Phase 06: Sales + POS + Invoicing
-- [ ] Phase 07: Purchasing + Procurement
+- [x] Phase 06: Sales + POS + Invoicing
+- [x] Phase 07: Purchasing + Procurement
 - [ ] Phase 08: Accounting + General Ledger
 - [ ] Phase 09: Cash + Banks + Reconciliation
 - [ ] Phase 10: HR + Employees + Departments
