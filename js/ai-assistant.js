@@ -411,9 +411,566 @@ class FinovateAI {
         };
     }
 
+    /**
+     * Initialize API Keys from localStorage
+     */
+    loadAPIKeys() {
+        const keys = localStorage.getItem('finovate_ai_keys');
+        return keys ? JSON.parse(keys) : {};
+    }
+
+    /**
+     * Save API Key for a provider
+     */
+    saveAPIKey(providerId, key) {
+        this.apiKeys[providerId] = key;
+        localStorage.setItem('finovate_ai_keys', JSON.stringify(this.apiKeys));
+        return true;
+    }
+
+    /**
+     * Remove API Key
+     */
+    removeAPIKey(providerId) {
+        delete this.apiKeys[providerId];
+        localStorage.setItem('finovate_ai_keys', JSON.stringify(this.apiKeys));
+        return true;
+    }
+
+    /**
+     * Get API Key URL for provider
+     */
+    getKeyUrl(providerId) {
+        const urls = {
+            openai: 'https://platform.openai.com/api-keys',
+            anthropic: 'https://console.anthropic.com/settings/keys',
+            google: 'https://aistudio.google.com/app/apikey',
+            azure: 'https://portal.azure.com/#view/Microsoft_Azure_Project_Oxford/CognitiveServicesHub',
+            groq: 'https://console.groq.com/keys',
+            meta: 'https://llama.meta.com/llama-api/',
+            mistral: 'https://console.mistral.ai/api-keys/',
+            cohere: 'https://dashboard.cohere.com/api-keys',
+            perplexity: 'https://www.perplexity.ai/settings/api',
+            deepseek: 'https://platform.deepseek.com/api_keys',
+            qwen: 'https://dashscope.console.aliyun.com/apiKey',
+            yi: 'https://platform.lingyiwanwu.com/apikeys',
+            moonshot: 'https://platform.moonshot.cn/console/api-keys',
+            baichuan: 'https://www.baichuan-ai.com/console/apikey',
+            stepfun: 'https://platform.stepfun.com/interface-key',
+            minimax: 'https://api.minimax.chat/usercenter/basic-information/interface-key',
+            sensetime: 'https://console.sensenova.cn/iam/apikey/manage',
+            zhipu: 'https://open.bigmodel.cn/usercenter/apikeys',
+            together: 'https://api.together.xyz/settings/api-keys',
+            fireworks: 'https://fireworks.ai/account/api-keys',
+            replicate: 'https://replicate.com/account/api-tokens',
+            huggingface: 'https://huggingface.co/settings/tokens',
+            nvidia: 'https://build.nvidia.com/explore/discover',
+            ibm: 'https://cloud.ibm.com/apidocs/watsonx-ai',
+            amazon: 'https://console.aws.amazon.com/bedrock/home',
+            oracle: 'https://cloud.oracle.com/generative-ai',
+            stability: 'https://platform.stability.ai/account/keys',
+            elevenlabs: 'https://elevenlabs.io/speech-synthesis',
+            palm: 'https://makersuite.google.com/app/apikey',
+            ai21: 'https://studio.ai21.com/account/api-key',
+            ollama: 'http://localhost:11434'
+        };
+        return urls[providerId] || '#';
+    }
+
+    /**
+     * Test API Key connectivity
+     */
+    async testAPIKey(providerId) {
+        const key = this.apiKeys[providerId];
+        if (!key) {
+            return { success: false, message: 'No API key found' };
+        }
+
+        try {
+            const provider = this.providers[providerId];
+            let response;
+
+            // Simple test based on provider type
+            switch (providerId) {
+                case 'openai':
+                    response = await fetch(`${provider.baseUrl}/models`, {
+                        headers: { 'Authorization': `Bearer ${key}` }
+                    });
+                    break;
+                case 'anthropic':
+                    response = await fetch(`${provider.baseUrl}/models`, {
+                        headers: { 
+                            'X-API-Key': key,
+                            'anthropic-version': '2023-06-01'
+                        }
+                    });
+                    break;
+                case 'google':
+                    response = await fetch(`${provider.baseUrl}/models?key=${key}`);
+                    break;
+                case 'groq':
+                    response = await fetch(`${provider.baseUrl}/models`, {
+                        headers: { 'Authorization': `Bearer ${key}` }
+                    });
+                    break;
+                case 'mistral':
+                    response = await fetch(`${provider.baseUrl}/models`, {
+                        headers: { 'Authorization': `Bearer ${key}` }
+                    });
+                    break;
+                case 'ollama':
+                    response = await fetch(`${provider.baseUrl}/tags`);
+                    break;
+                default:
+                    // Generic test - just check if key exists
+                    return { 
+                        success: true, 
+                        message: `API key configured for ${provider.name}. Manual testing required.` 
+                    };
+            }
+
+            if (response && response.ok) {
+                return { success: true, message: 'Connection successful!' };
+            } else {
+                const error = await response?.text() || 'Unknown error';
+                return { success: false, message: `Connection failed: ${error}` };
+            }
+        } catch (error) {
+            return { success: false, message: `Error: ${error.message}` };
+        }
+    }
+
+    /**
+     * Initialize AI Agents System
+     */
+    initializeAgents() {
+        return {
+            financial_analyst: {
+                id: 'financial_analyst',
+                name: 'المحلل المالي',
+                nameEn: 'Financial Analyst',
+                icon: '📊',
+                description: 'متخصص في تحليل البيانات المالية والأداء الاقتصادي',
+                descriptionEn: 'Specialized in financial data analysis and economic performance',
+                expertise: ['financial_analysis', 'profit_loss', 'cash_flow', 'budgeting'],
+                enabled: true,
+                color: '#10b981'
+            },
+            inventory_manager: {
+                id: 'inventory_manager',
+                name: 'مدير المخزون',
+                nameEn: 'Inventory Manager',
+                icon: '📦',
+                description: 'خبير في إدارة المخزون والتنبؤ بالطلب',
+                descriptionEn: 'Expert in inventory management and demand forecasting',
+                expertise: ['inventory_optimization', 'stock_prediction', 'warehouse_management'],
+                enabled: true,
+                color: '#f59e0b'
+            },
+            accounting_assistant: {
+                id: 'accounting_assistant',
+                name: 'المساعد المحاسبي',
+                nameEn: 'Accounting Assistant',
+                icon: '📒',
+                description: 'مساعد محاسبي لإدخال القيود والتحليلات',
+                descriptionEn: 'Accounting assistant for journal entries and analysis',
+                expertise: ['journal_entries', 'account_reconciliation', 'tax_compliance'],
+                enabled: true,
+                color: '#3b82f6'
+            },
+            hr_specialist: {
+                id: 'hr_specialist',
+                name: 'أخصائي الموارد البشرية',
+                nameEn: 'HR Specialist',
+                icon: '👥',
+                description: 'متخصص في شؤون الموظفين والرواتب',
+                descriptionEn: 'Specialist in employee affairs and payroll',
+                expertise: ['payroll', 'attendance', 'recruitment', 'performance'],
+                enabled: true,
+                color: '#ec4899'
+            },
+            sales_optimizer: {
+                id: 'sales_optimizer',
+                name: 'محسن المبيعات',
+                nameEn: 'Sales Optimizer',
+                icon: '📈',
+                description: 'خبير في تحسين المبيعات والتسويق',
+                descriptionEn: 'Expert in sales optimization and marketing',
+                expertise: ['sales_analysis', 'customer_segmentation', 'pricing_strategy'],
+                enabled: true,
+                color: '#8b5cf6'
+            },
+            procurement_advisor: {
+                id: 'procurement_advisor',
+                name: 'مستشار المشتريات',
+                nameEn: 'Procurement Advisor',
+                icon: '🛒',
+                description: 'مستشار للمشتريات وإدارة الموردين',
+                descriptionEn: 'Advisor for procurement and supplier management',
+                expertise: ['supplier_evaluation', 'purchase_optimization', 'cost_reduction'],
+                enabled: true,
+                color: '#06b6d4'
+            },
+            crm_specialist: {
+                id: 'crm_specialist',
+                name: 'أخصائي CRM',
+                nameEn: 'CRM Specialist',
+                icon: '🤝',
+                description: 'متخصص في إدارة علاقات العملاء',
+                descriptionEn: 'Specialist in customer relationship management',
+                expertise: ['customer_analysis', 'retention_strategy', 'satisfaction'],
+                enabled: true,
+                color: '#f97316'
+            },
+            project_manager: {
+                id: 'project_manager',
+                name: 'مدير المشاريع',
+                nameEn: 'Project Manager',
+                icon: '📋',
+                description: 'خبير في إدارة المشاريع والموارد',
+                descriptionEn: 'Expert in project and resource management',
+                expertise: ['project_planning', 'resource_allocation', 'timeline_optimization'],
+                enabled: true,
+                color: '#6366f1'
+            },
+            compliance_officer: {
+                id: 'compliance_officer',
+                name: 'مسؤول الامتثال',
+                nameEn: 'Compliance Officer',
+                icon: '⚖️',
+                description: 'مراقب للامتثال واللوائح الضريبية',
+                descriptionEn: 'Monitor for compliance and tax regulations',
+                expertise: ['tax_compliance', 'audit_preparation', 'regulatory_reporting'],
+                enabled: true,
+                color: '#14b8a6'
+            },
+            bi_analyst: {
+                id: 'bi_analyst',
+                name: 'محلل BI',
+                nameEn: 'BI Analyst',
+                icon: '📊',
+                description: 'محلل ذكاء الأعمال والتقارير',
+                descriptionEn: 'Business intelligence and reports analyst',
+                expertise: ['dashboard_creation', 'kpi_tracking', 'trend_analysis'],
+                enabled: true,
+                color: '#0ea5e9'
+            }
+        };
+    }
+
+    /**
+     * Load user preferences
+     */
+    loadPreferences() {
+        const prefs = localStorage.getItem('finovate_ai_prefs');
+        if (prefs) {
+            const parsed = JSON.parse(prefs);
+            this.activeProvider = parsed.activeProvider || 'openai';
+            this.activeModel = parsed.activeModel || 'gpt-4o';
+            this.agentMode = parsed.agentMode || false;
+            this.activeAgents = parsed.activeAgents || [];
+        }
+    }
+
+    /**
+     * Save user preferences
+     */
+    savePreferences() {
+        const prefs = {
+            activeProvider: this.activeProvider,
+            activeModel: this.activeModel,
+            agentMode: this.agentMode,
+            activeAgents: this.activeAgents
+        };
+        localStorage.setItem('finovate_ai_prefs', JSON.stringify(prefs));
+    }
+
+    /**
+     * Render Settings UI
+     */
+    renderSettingsUI(container) {
+        if (!container) return;
+
+        const isRTL = document.documentElement.dir === 'rtl';
+        const t = {
+            title: isRTL ? 'إعدادات الذكاء الاصطناعي' : 'AI Settings',
+            provider: isRTL ? 'مزود الخدمة' : 'Provider',
+            model: isRTL ? 'النموذج' : 'Model',
+            apiKey: isRTL ? 'مفتاح API' : 'API Key',
+            save: isRTL ? 'حفظ' : 'Save',
+            test: isRTL ? 'اختبار' : 'Test',
+            getUrl: isRTL ? 'احصل على المفتاح' : 'Get Key',
+            agents: isRTL ? 'الوكلاء الأذكياء' : 'AI Agents',
+            enableAgentMode: isRTL ? 'تفعيل وضع الوكلاء' : 'Enable Agent Mode',
+            selectAgents: isRTL ? 'اختر الوكلاء' : 'Select Agents',
+            status: isRTL ? 'الحالة' : 'Status',
+            configured: isRTL ? 'مكوّن' : 'Configured',
+            notConfigured: isRTL ? 'غير مكوّن' : 'Not Configured',
+            testing: isRTL ? 'جاري الاختبار...' : 'Testing...',
+            success: isRTL ? 'ناجح' : 'Success',
+            failed: isRTL ? 'فشل' : 'Failed'
+        };
+
+        let html = `
+            <div class="ai-settings-header">
+                <h2>🤖 ${t.title}</h2>
+            </div>
+
+            <div class="ai-settings-section">
+                <h3>${t.provider} & ${t.model}</h3>
+                <div class="ai-setting-row">
+                    <label>${t.provider}</label>
+                    <select id="ai-provider-select" onchange="FinovateAIInstance.onProviderChange(this.value)">
+        `;
+
+        // Provider options
+        Object.entries(this.providers).forEach(([key, provider]) => {
+            const selected = key === this.activeProvider ? 'selected' : '';
+            const hasKey = this.apiKeys[key] ? '✅' : '⚪';
+            html += `<option value="${key}" ${selected}>${provider.icon} ${provider.name} ${hasKey}</option>`;
+        });
+
+        html += `
+                    </select>
+                </div>
+
+                <div class="ai-setting-row">
+                    <label>${t.model}</label>
+                    <select id="ai-model-select">
+        `;
+
+        // Model options for current provider
+        const currentProvider = this.providers[this.activeProvider];
+        if (currentProvider && currentProvider.models) {
+            currentProvider.models.forEach(model => {
+                const selected = model.id === this.activeModel ? 'selected' : '';
+                html += `<option value="${model.id}" ${selected}>${model.name} (${(model.maxTokens / 1000).toFixed(0)}K)</option>`;
+            });
+        }
+
+        html += `
+                    </select>
+                </div>
+            </div>
+
+            <div class="ai-settings-section">
+                <h3>🔑 ${t.apiKey}</h3>
+        `;
+
+        // API Key management for each provider
+        Object.entries(this.providers).forEach(([key, provider]) => {
+            const hasKey = !!this.apiKeys[key];
+            const statusClass = hasKey ? 'status-configured' : 'status-not-configured';
+            const statusText = hasKey ? t.configured : t.notConfigured;
+
+            html += `
+                <div class="ai-api-key-card" id="api-key-card-${key}">
+                    <div class="api-key-header">
+                        <span class="provider-icon">${provider.icon}</span>
+                        <span class="provider-name">${provider.name}</span>
+                        <span class="api-key-status ${statusClass}">${statusText}</span>
+                    </div>
+                    <div class="api-key-inputs">
+                        <input type="password" 
+                               id="api-key-input-${key}" 
+                               placeholder="${t.apiKey}..." 
+                               value="${this.apiKeys[key] || ''}"
+                               class="api-key-field">
+                        <div class="api-key-actions">
+                            <button onclick="FinovateAIInstance.saveAPIKeyFromUI('${key}')" 
+                                    class="btn-save" 
+                                    title="${t.save}">💾</button>
+                            <button onclick="FinovateAIInstance.testAPIKeyFromUI('${key}')" 
+                                    class="btn-test" 
+                                    title="${t.test}">🧪</button>
+                            <a href="${this.getKeyUrl(key)}" 
+                               target="_blank" 
+                               class="btn-get-key" 
+                               title="${t.getUrl}">🔗</a>
+                            ${hasKey ? `<button onclick="FinovateAIInstance.removeAPIKeyFromUI('${key}')" class="btn-delete" title="Delete">🗑️</button>` : ''}
+                        </div>
+                    </div>
+                    <div id="api-key-result-${key}" class="api-key-result"></div>
+                </div>
+            `;
+        });
+
+        html += `
+            </div>
+
+            <div class="ai-settings-section">
+                <h3>🤖 ${t.agents}</h3>
+                <div class="ai-setting-row">
+                    <label>${t.enableAgentMode}</label>
+                    <input type="checkbox" 
+                           id="agent-mode-toggle" 
+                           ${this.agentMode ? 'checked' : ''}
+                           onchange="FinovateAIInstance.toggleAgentMode(this.checked)">
+                </div>
+                <div class="agents-grid">
+        `;
+
+        // Agents grid
+        Object.values(this.agents).forEach(agent => {
+            const isActive = this.activeAgents.includes(agent.id);
+            html += `
+                <div class="agent-card ${isActive ? 'active' : ''}" 
+                     onclick="FinovateAIInstance.toggleAgent('${agent.id}')">
+                    <div class="agent-icon" style="background-color: ${agent.color}">${agent.icon}</div>
+                    <div class="agent-info">
+                        <div class="agent-name">${isRTL ? agent.name : agent.nameEn}</div>
+                        <div class="agent-desc">${isRTL ? agent.description : agent.descriptionEn}</div>
+                    </div>
+                    <div class="agent-toggle ${isActive ? 'active' : ''}">✓</div>
+                </div>
+            `;
+        });
+
+        html += `
+                </div>
+            </div>
+
+            <div class="ai-settings-footer">
+                <button onclick="FinovateAIInstance.savePreferences()" class="btn-primary">${t.save}</button>
+                <a href="index.html" class="btn-secondary">${isRTL ? 'العودة للرئيسية' : 'Back to Home'}</a>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    /**
+     * Handle provider change
+     */
+    onProviderChange(providerId) {
+        this.activeProvider = providerId;
+        const modelSelect = document.getElementById('ai-model-select');
+        if (modelSelect) {
+            const provider = this.providers[providerId];
+            modelSelect.innerHTML = '';
+            if (provider && provider.models) {
+                provider.models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model.id;
+                    option.textContent = `${model.name} (${(model.maxTokens / 1000).toFixed(0)}K)`;
+                    if (model.id === this.activeModel) option.selected = true;
+                    modelSelect.appendChild(option);
+                });
+            }
+        }
+    }
+
+    /**
+     * Save API Key from UI
+     */
+    saveAPIKeyFromUI(providerId) {
+        const input = document.getElementById(`api-key-input-${providerId}`);
+        const key = input.value.trim();
+        
+        if (key) {
+            this.saveAPIKey(providerId, key);
+            this.updateAPIKeyStatus(providerId, true);
+            alert(`API Key saved for ${this.providers[providerId].name}`);
+        }
+    }
+
+    /**
+     * Test API Key from UI
+     */
+    async testAPIKeyFromUI(providerId) {
+        const resultDiv = document.getElementById(`api-key-result-${providerId}`);
+        const isRTL = document.documentElement.dir === 'rtl';
+        
+        resultDiv.innerHTML = `<span class="testing">${isRTL ? 'جاري الاختبار...' : 'Testing...'}</span>`;
+        
+        const result = await this.testAPIKey(providerId);
+        
+        if (result.success) {
+            resultDiv.innerHTML = `<span class="success">✅ ${result.message}</span>`;
+        } else {
+            resultDiv.innerHTML = `<span class="failed">❌ ${result.message}</span>`;
+        }
+    }
+
+    /**
+     * Remove API Key from UI
+     */
+    removeAPIKeyFromUI(providerId) {
+        if (confirm('Are you sure you want to remove this API key?')) {
+            this.removeAPIKey(providerId);
+            const input = document.getElementById(`api-key-input-${providerId}`);
+            if (input) input.value = '';
+            this.updateAPIKeyStatus(providerId, false);
+        }
+    }
+
+    /**
+     * Update API Key status indicator
+     */
+    updateAPIKeyStatus(providerId, hasKey) {
+        const card = document.getElementById(`api-key-card-${providerId}`);
+        if (!card) return;
+
+        const statusEl = card.querySelector('.api-key-status');
+        const isRTL = document.documentElement.dir === 'rtl';
+        
+        if (hasKey) {
+            statusEl.className = 'api-key-status status-configured';
+            statusEl.textContent = isRTL ? 'مكوّن' : 'Configured';
+            
+            // Add delete button if not exists
+            const actionsDiv = card.querySelector('.api-key-actions');
+            if (!actionsDiv.querySelector('.btn-delete')) {
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn-delete';
+                deleteBtn.innerHTML = '🗑️';
+                deleteBtn.onclick = () => this.removeAPIKeyFromUI(providerId);
+                actionsDiv.appendChild(deleteBtn);
+            }
+        } else {
+            statusEl.className = 'api-key-status status-not-configured';
+            statusEl.textContent = isRTL ? 'غير مكوّن' : 'Not Configured';
+            
+            // Remove delete button
+            const deleteBtn = card.querySelector('.btn-delete');
+            if (deleteBtn) deleteBtn.remove();
+        }
+    }
+
+    /**
+     * Toggle Agent Mode
+     */
+    toggleAgentMode(enabled) {
+        this.agentMode = enabled;
+        this.savePreferences();
+    }
+
+    /**
+     * Toggle individual agent
+     */
+    toggleAgent(agentId) {
+        const index = this.activeAgents.indexOf(agentId);
+        if (index > -1) {
+            this.activeAgents.splice(index, 1);
+        } else {
+            this.activeAgents.push(agentId);
+        }
+        
+        // Update UI
+        const agentCard = document.querySelector(`.agent-card[onclick*="${agentId}"]`);
+        if (agentCard) {
+            agentCard.classList.toggle('active');
+            const toggle = agentCard.querySelector('.agent-toggle');
+            if (toggle) toggle.classList.toggle('active');
+        }
+        
+        this.savePreferences();
+    }
+
     init() {
         console.log('Finovate AI Assistant initialized');
         this.loadContext();
+        this.loadPreferences();
     }
 
     loadContext() {
