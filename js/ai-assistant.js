@@ -1,8 +1,15 @@
 /**
  * FINOVATE AI Assistant - Finovate Copilot
- * Phase 22: AI Integration
+ * Phase 22: AI Integration - Advanced Multi-Provider AI System
  * Developer: Ahmed Mostafa Ibrahim
  * Brand: FINOVATE – AHMED EG
+ * 
+ * Features:
+ * - Support for 30+ AI Providers
+ * - Advanced Agent System
+ * - Multi-key Management
+ * - Model Selection & Testing
+ * - Google Drive Integration
  */
 
 class FinovateAI {
@@ -14,7 +21,394 @@ class FinovateAI {
             currentModule: null
         };
         this.conversationHistory = [];
+        this.providers = this.initializeProviders();
+        this.agents = this.initializeAgents();
+        this.activeProvider = 'openai';
+        this.activeModel = 'gpt-4o';
+        this.apiKeys = this.loadAPIKeys();
+        this.agentMode = false;
+        this.activeAgents = [];
         this.init();
+    }
+
+    /**
+     * Initialize 30+ AI Providers with all their models
+     */
+    initializeProviders() {
+        return {
+            // OpenAI Providers
+            openai: {
+                name: 'OpenAI',
+                apiKeyField: 'openai_key',
+                baseUrl: 'https://api.openai.com/v1',
+                models: [
+                    { id: 'gpt-4o', name: 'GPT-4o', type: 'chat', maxTokens: 128000 },
+                    { id: 'gpt-4o-mini', name: 'GPT-4o Mini', type: 'chat', maxTokens: 128000 },
+                    { id: 'gpt-4-turbo', name: 'GPT-4 Turbo', type: 'chat', maxTokens: 128000 },
+                    { id: 'gpt-4', name: 'GPT-4', type: 'chat', maxTokens: 8192 },
+                    { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', type: 'chat', maxTokens: 16385 },
+                    { id: 'o1-preview', name: 'o1 Preview', type: 'reasoning', maxTokens: 32768 },
+                    { id: 'o1-mini', name: 'o1 Mini', type: 'reasoning', maxTokens: 65536 }
+                ],
+                icon: '🟢'
+            },
+            // Anthropic
+            anthropic: {
+                name: 'Anthropic',
+                apiKeyField: 'anthropic_key',
+                baseUrl: 'https://api.anthropic.com/v1',
+                models: [
+                    { id: 'claude-sonnet-4-20250514', name: 'Claude Sonnet 4', type: 'chat', maxTokens: 200000 },
+                    { id: 'claude-3-5-sonnet-20241022', name: 'Claude 3.5 Sonnet', type: 'chat', maxTokens: 200000 },
+                    { id: 'claude-3-opus-20240229', name: 'Claude 3 Opus', type: 'chat', maxTokens: 200000 },
+                    { id: 'claude-3-haiku-20240307', name: 'Claude 3 Haiku', type: 'chat', maxTokens: 200000 }
+                ],
+                icon: '🟠'
+            },
+            // Google
+            google: {
+                name: 'Google AI',
+                apiKeyField: 'google_key',
+                baseUrl: 'https://generativelanguage.googleapis.com/v1beta',
+                models: [
+                    { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash', type: 'chat', maxTokens: 1048576 },
+                    { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro', type: 'chat', maxTokens: 2097152 },
+                    { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash', type: 'chat', maxTokens: 1048576 },
+                    { id: 'gemini-pro', name: 'Gemini Pro', type: 'chat', maxTokens: 32768 }
+                ],
+                icon: '🔵'
+            },
+            // Microsoft Azure
+            azure: {
+                name: 'Azure OpenAI',
+                apiKeyField: 'azure_key',
+                baseUrl: 'https://{resource}.openai.azure.com/openai/deployments/{deployment}',
+                models: [
+                    { id: 'gpt-4o', name: 'GPT-4o', type: 'chat', maxTokens: 128000 },
+                    { id: 'gpt-4-turbo', name: 'GPT-4 Turbo', type: 'chat', maxTokens: 128000 },
+                    { id: 'gpt-35-turbo', name: 'GPT-3.5 Turbo', type: 'chat', maxTokens: 16385 }
+                ],
+                icon: '💠',
+                requiresConfig: ['resource', 'deployment']
+            },
+            // Groq
+            groq: {
+                name: 'Groq',
+                apiKeyField: 'groq_key',
+                baseUrl: 'https://api.groq.com/openai/v1',
+                models: [
+                    { id: 'llama-3.1-70b-versatile', name: 'Llama 3.1 70B', type: 'chat', maxTokens: 131072 },
+                    { id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B', type: 'chat', maxTokens: 131072 },
+                    { id: 'mixtral-8x7b-32768', name: 'Mixtral 8x7B', type: 'chat', maxTokens: 32768 },
+                    { id: 'gemma2-9b-it', name: 'Gemma2 9B', type: 'chat', maxTokens: 8192 }
+                ],
+                icon: '⚡'
+            },
+            // Meta
+            meta: {
+                name: 'Meta AI',
+                apiKeyField: 'meta_key',
+                baseUrl: 'https://api.llama-api.com',
+                models: [
+                    { id: 'llama-3.1-405b-instruct', name: 'Llama 3.1 405B', type: 'chat', maxTokens: 131072 },
+                    { id: 'llama-3.1-70b-instruct', name: 'Llama 3.1 70B', type: 'chat', maxTokens: 131072 },
+                    { id: 'llama-3.1-8b-instruct', name: 'Llama 3.1 8B', type: 'chat', maxTokens: 131072 }
+                ],
+                icon: '🦙'
+            },
+            // Mistral AI
+            mistral: {
+                name: 'Mistral AI',
+                apiKeyField: 'mistral_key',
+                baseUrl: 'https://api.mistral.ai/v1',
+                models: [
+                    { id: 'mistral-large-latest', name: 'Mistral Large', type: 'chat', maxTokens: 131072 },
+                    { id: 'mistral-medium-latest', name: 'Mistral Medium', type: 'chat', maxTokens: 32768 },
+                    { id: 'mistral-small-latest', name: 'Mistral Small', type: 'chat', maxTokens: 32768 },
+                    { id: 'open-mixtral-8x7b', name: 'Mixtral 8x7B', type: 'chat', maxTokens: 32768 }
+                ],
+                icon: '🌀'
+            },
+            // Cohere
+            cohere: {
+                name: 'Cohere',
+                apiKeyField: 'cohere_key',
+                baseUrl: 'https://api.cohere.ai/v1',
+                models: [
+                    { id: 'command-r-plus', name: 'Command R+', type: 'chat', maxTokens: 128000 },
+                    { id: 'command-r', name: 'Command R', type: 'chat', maxTokens: 128000 },
+                    { id: 'command', name: 'Command', type: 'chat', maxTokens: 4096 }
+                ],
+                icon: '🟣'
+            },
+            // Perplexity
+            perplexity: {
+                name: 'Perplexity',
+                apiKeyField: 'perplexity_key',
+                baseUrl: 'https://api.perplexity.ai',
+                models: [
+                    { id: 'sonar-pro', name: 'Sonar Pro', type: 'chat', maxTokens: 200000 },
+                    { id: 'sonar', name: 'Sonar', type: 'chat', maxTokens: 127000 },
+                    { id: 'sonar-reasoning-pro', name: 'Sonar Reasoning Pro', type: 'reasoning', maxTokens: 127000 }
+                ],
+                icon: '🔍'
+            },
+            // DeepSeek
+            deepseek: {
+                name: 'DeepSeek',
+                apiKeyField: 'deepseek_key',
+                baseUrl: 'https://api.deepseek.com/v1',
+                models: [
+                    { id: 'deepseek-chat', name: 'DeepSeek Chat', type: 'chat', maxTokens: 128000 },
+                    { id: 'deepseek-coder', name: 'DeepSeek Coder', type: 'code', maxTokens: 128000 },
+                    { id: 'deepseek-reasoner', name: 'DeepSeek Reasoner', type: 'reasoning', maxTokens: 65536 }
+                ],
+                icon: '🐋'
+            },
+            // Qwen (Alibaba)
+            qwen: {
+                name: 'Qwen (Alibaba)',
+                apiKeyField: 'qwen_key',
+                baseUrl: 'https://dashscope-intl.aliyuncs.com/api/v1',
+                models: [
+                    { id: 'qwen-max', name: 'Qwen Max', type: 'chat', maxTokens: 32768 },
+                    { id: 'qwen-plus', name: 'Qwen Plus', type: 'chat', maxTokens: 32768 },
+                    { id: 'qwen-turbo', name: 'Qwen Turbo', type: 'chat', maxTokens: 131072 }
+                ],
+                icon: '☁️'
+            },
+            // Yi (01.AI)
+            yi: {
+                name: 'Yi (01.AI)',
+                apiKeyField: 'yi_key',
+                baseUrl: 'https://api.lingyiwanwu.com/v1',
+                models: [
+                    { id: 'yi-large', name: 'Yi Large', type: 'chat', maxTokens: 32768 },
+                    { id: 'yi-medium', name: 'Yi Medium', type: 'chat', maxTokens: 32768 },
+                    { id: 'yi-spark', name: 'Yi Spark', type: 'chat', maxTokens: 16384 }
+                ],
+                icon: '🌟'
+            },
+            // Moonshot
+            moonshot: {
+                name: 'Moonshot AI',
+                apiKeyField: 'moonshot_key',
+                baseUrl: 'https://api.moonshot.cn/v1',
+                models: [
+                    { id: 'moonshot-v1-128k', name: 'Moonshot V1 128K', type: 'chat', maxTokens: 131072 },
+                    { id: 'moonshot-v1-32k', name: 'Moonshot V1 32K', type: 'chat', maxTokens: 32768 },
+                    { id: 'moonshot-v1-8k', name: 'Moonshot V1 8K', type: 'chat', maxTokens: 8192 }
+                ],
+                icon: '🌙'
+            },
+            // Baichuan
+            baichuan: {
+                name: 'Baichuan AI',
+                apiKeyField: 'baichuan_key',
+                baseUrl: 'https://api.baichuan-ai.com/v1',
+                models: [
+                    { id: 'Baichuan4', name: 'Baichuan 4', type: 'chat', maxTokens: 32768 },
+                    { id: 'Baichuan3-Turbo', name: 'Baichuan 3 Turbo', type: 'chat', maxTokens: 32768 }
+                ],
+                icon: '📯'
+            },
+            // StepFun
+            stepfun: {
+                name: 'StepFun',
+                apiKeyField: 'stepfun_key',
+                baseUrl: 'https://api.stepfun.com/v1',
+                models: [
+                    { id: 'step-1-32k', name: 'Step-1 32K', type: 'chat', maxTokens: 32768 },
+                    { id: 'step-1-128k', name: 'Step-1 128K', type: 'chat', maxTokens: 131072 }
+                ],
+                icon: '👣'
+            },
+            // Minimax
+            minimax: {
+                name: 'MiniMax',
+                apiKeyField: 'minimax_key',
+                baseUrl: 'https://api.minimax.chat/v1',
+                models: [
+                    { id: 'abab6.5s-chat', name: 'ABAB 6.5S', type: 'chat', maxTokens: 256000 },
+                    { id: 'abab6.5-chat', name: 'ABAB 6.5', type: 'chat', maxTokens: 8192 }
+                ],
+                icon: '🤖'
+            },
+            // SenseTime
+            sensetime: {
+                name: 'SenseTime',
+                apiKeyField: 'sensetime_key',
+                baseUrl: 'https://api.sensenova.cn/v1',
+                models: [
+                    { id: 'sensechat-5', name: 'SenseChat 5', type: 'chat', maxTokens: 32768 },
+                    { id: 'sensechat-turbo', name: 'SenseChat Turbo', type: 'chat', maxTokens: 32768 }
+                ],
+                icon: '👁️'
+            },
+            // Zhipu (GLM)
+            zhipu: {
+                name: 'Zhipu AI (GLM)',
+                apiKeyField: 'zhipu_key',
+                baseUrl: 'https://open.bigmodel.cn/api/paas/v4',
+                models: [
+                    { id: 'glm-4', name: 'GLM-4', type: 'chat', maxTokens: 128000 },
+                    { id: 'glm-4-air', name: 'GLM-4 Air', type: 'chat', maxTokens: 128000 },
+                    { id: 'glm-4-flash', name: 'GLM-4 Flash', type: 'chat', maxTokens: 128000 }
+                ],
+                icon: '🧠'
+            },
+            // Together AI
+            together: {
+                name: 'Together AI',
+                apiKeyField: 'together_key',
+                baseUrl: 'https://api.together.xyz/v1',
+                models: [
+                    { id: 'meta-llama/Llama-3.1-405B-Instruct-Turbo', name: 'Llama 3.1 405B Turbo', type: 'chat', maxTokens: 32768 },
+                    { id: 'meta-llama/Llama-3.1-70B-Instruct-Turbo', name: 'Llama 3.1 70B Turbo', type: 'chat', maxTokens: 32768 },
+                    { id: 'mistralai/Mixtral-8x7B-Instruct-v0.1', name: 'Mixtral 8x7B', type: 'chat', maxTokens: 32768 }
+                ],
+                icon: '🚀'
+            },
+            // Fireworks AI
+            fireworks: {
+                name: 'Fireworks AI',
+                apiKeyField: 'fireworks_key',
+                baseUrl: 'https://api.fireworks.ai/inference/v1',
+                models: [
+                    { id: 'accounts/fireworks/models/llama-v3p1-405b-instruct', name: 'Llama 3.1 405B', type: 'chat', maxTokens: 131072 },
+                    { id: 'accounts/fireworks/models/llama-v3p1-70b-instruct', name: 'Llama 3.1 70B', type: 'chat', maxTokens: 131072 }
+                ],
+                icon: '🎆'
+            },
+            // Replicate
+            replicate: {
+                name: 'Replicate',
+                apiKeyField: 'replicate_key',
+                baseUrl: 'https://api.replicate.com/v1',
+                models: [
+                    { id: 'meta/meta-llama-3.1-405b-instruct', name: 'Llama 3.1 405B', type: 'chat', maxTokens: 32768 },
+                    { id: 'mistralai/mistral-large-2-instruct', name: 'Mistral Large 2', type: 'chat', maxTokens: 131072 }
+                ],
+                icon: '🔄'
+            },
+            // Hugging Face
+            huggingface: {
+                name: 'Hugging Face',
+                apiKeyField: 'huggingface_key',
+                baseUrl: 'https://api-inference.huggingface.co/models',
+                models: [
+                    { id: 'meta-llama/Meta-Llama-3.1-70B-Instruct', name: 'Llama 3.1 70B', type: 'chat', maxTokens: 8192 },
+                    { id: 'mistralai/Mixtral-8x7B-Instruct-v0.1', name: 'Mixtral 8x7B', type: 'chat', maxTokens: 8192 }
+                ],
+                icon: '🤗'
+            },
+            // NVIDIA NIM
+            nvidia: {
+                name: 'NVIDIA NIM',
+                apiKeyField: 'nvidia_key',
+                baseUrl: 'https://integrate.api.nvidia.com/v1',
+                models: [
+                    { id: 'meta/llama-3.1-405b-instruct', name: 'Llama 3.1 405B', type: 'chat', maxTokens: 32768 },
+                    { id: 'meta/llama-3.1-70b-instruct', name: 'Llama 3.1 70B', type: 'chat', maxTokens: 32768 },
+                    { id: 'google/gemma-7b', name: 'Gemma 7B', type: 'chat', maxTokens: 8192 }
+                ],
+                icon: '🎮'
+            },
+            // IBM WatsonX
+            ibm: {
+                name: 'IBM watsonx.ai',
+                apiKeyField: 'ibm_key',
+                baseUrl: 'https://us-south.ml.cloud.ibm.com/ml/v1/text/generation',
+                models: [
+                    { id: 'ibm/granite-34b-code-instruct', name: 'Granite 34B Code', type: 'code', maxTokens: 8192 },
+                    { id: 'ibm/granite-13b-chat-v2', name: 'Granite 13B Chat', type: 'chat', maxTokens: 8192 }
+                ],
+                icon: '🔷'
+            },
+            // Amazon Bedrock
+            amazon: {
+                name: 'Amazon Bedrock',
+                apiKeyField: 'amazon_key',
+                baseUrl: 'https://bedrock-runtime.{region}.amazonaws.com/model/{modelId}/invoke',
+                models: [
+                    { id: 'anthropic.claude-3-5-sonnet-20241022-v2:0', name: 'Claude 3.5 Sonnet', type: 'chat', maxTokens: 200000 },
+                    { id: 'meta.llama3-1-405b-instruct-v1:0', name: 'Llama 3.1 405B', type: 'chat', maxTokens: 131072 },
+                    { id: 'mistral.mistral-large-2407-v1:0', name: 'Mistral Large 2', type: 'chat', maxTokens: 131072 }
+                ],
+                icon: '📦',
+                requiresConfig: ['region']
+            },
+            // Oracle Cloud
+            oracle: {
+                name: 'Oracle Cloud AI',
+                apiKeyField: 'oracle_key',
+                baseUrl: 'https://inference.generativeai.{region}.oci.oraclecloud.com/20231130/actions/chat',
+                models: [
+                    { id: 'cohere.command-r-plus', name: 'Command R+', type: 'chat', maxTokens: 128000 },
+                    { id: 'meta.llama-3.1-70b-instruct', name: 'Llama 3.1 70B', type: 'chat', maxTokens: 131072 }
+                ],
+                icon: '🔶',
+                requiresConfig: ['region']
+            },
+            // Stability AI
+            stability: {
+                name: 'Stability AI',
+                apiKeyField: 'stability_key',
+                baseUrl: 'https://api.stability.ai/v2beta',
+                models: [
+                    { id: 'stable-diffusion-xl-1024-v1-0', name: 'SDXL 1.0', type: 'image', maxTokens: 0 },
+                    { id: 'stable-image-ultra-v1-1', name: 'Stable Image Ultra', type: 'image', maxTokens: 0 }
+                ],
+                icon: '🎨'
+            },
+            // ElevenLabs (Voice)
+            elevenlabs: {
+                name: 'ElevenLabs',
+                apiKeyField: 'elevenlabs_key',
+                baseUrl: 'https://api.elevenlabs.io/v1',
+                models: [
+                    { id: 'eleven_monolingual_v1', name: 'Eleven Monolingual', type: 'voice', maxTokens: 0 },
+                    { id: 'eleven_multilingual_v2', name: 'Eleven Multilingual v2', type: 'voice', maxTokens: 0 }
+                ],
+                icon: '🎙️'
+            },
+            // Palm (Legacy Google)
+            palm: {
+                name: 'PaLM (Legacy)',
+                apiKeyField: 'palm_key',
+                baseUrl: 'https://generativelanguage.googleapis.com/v1beta3',
+                models: [
+                    { id: 'text-bison-001', name: 'Text Bison', type: 'chat', maxTokens: 8192 },
+                    { id: 'chat-bison-001', name: 'Chat Bison', type: 'chat', maxTokens: 8192 }
+                ],
+                icon: '🌴'
+            },
+            // AI21 Labs
+            ai21: {
+                name: 'AI21 Labs',
+                apiKeyField: 'ai21_key',
+                baseUrl: 'https://api.ai21.com/studio/v1',
+                models: [
+                    { id: 'jamba-1.5-large', name: 'Jamba 1.5 Large', type: 'chat', maxTokens: 256000 },
+                    { id: 'jamba-1.5-mini', name: 'Jamba 1.5 Mini', type: 'chat', maxTokens: 256000 }
+                ],
+                icon: '🧬'
+            },
+            // Local Ollama
+            ollama: {
+                name: 'Ollama (Local)',
+                apiKeyField: 'ollama_key',
+                baseUrl: 'http://localhost:11434/v1',
+                models: [
+                    { id: 'llama3.1', name: 'Llama 3.1', type: 'chat', maxTokens: 131072 },
+                    { id: 'mistral', name: 'Mistral', type: 'chat', maxTokens: 32768 },
+                    { id: 'codellama', name: 'Code Llama', type: 'code', maxTokens: 16384 },
+                    { id: 'phi3', name: 'Phi-3', type: 'chat', maxTokens: 128000 }
+                ],
+                icon: '🦙',
+                isLocal: true
+            }
+        };
     }
 
     init() {
