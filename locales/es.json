@@ -1,0 +1,35 @@
+{
+  "login": {
+    "title": "Inicio de sesión - FINOVATE ERP X",
+    "subtitle": "Inicia sesión en tu espacio de trabajo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "remember": "Recuérdame",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "submit": "Iniciar sesión",
+    "help": "¿Necesitas ayuda?",
+    "contact": "Contactar soporte",
+    "welcome": "Bienvenido de nuevo",
+    "description": "Accede a tu sistema completo de gestión empresarial con soporte multiempresa, multisucursal y multidivisa.",
+    "feature1": "Gestión multiempresa",
+    "feature2": "Contabilidad avanzada",
+    "feature3": "Inventario y TPV",
+    "feature4": "RRHH y Nómina",
+    "feature5": "35+ idiomas"
+  },
+  "company": { "workspace": "Espacio de trabajo principal" },
+  "navigation": {
+    "workspace": "ESPACIO DE TRABAJO", "dashboard": "Panel de control", "analytics": "Analítica",
+    "operations": "OPERACIONES", "sales": "Ventas", "purchasing": "Compras", "inventory": "Inventario", "accounting": "Contabilidad",
+    "organization": "ORGANIZACIÓN", "people": "Personas y RRHH", "customers": "Clientes", "reports": "Informes", "settings": "Configuración"
+  },
+  "profile": { "administrator": "Administrador del sistema" },
+  "header": { "search": "Buscar…" },
+  "actions": { "newTransaction": "Nueva transacción", "viewAll": "Ver todo", "review": "Revisar", "save": "Guardar", "cancel": "Cancelar", "delete": "Eliminar" },
+  "dashboard": { "overview": "RESUMEN", "title": "Buenos días, Ahmed <span>✦</span>", "subtitle": "Esto es lo que está pasando en tu negocio hoy.", "period": "01 sep – 30 sep 2025" },
+  "metrics": { "revenue": "Ingresos totales", "netProfit": "Beneficio neto", "outstanding": "Facturas pendientes", "activeCustomers": "Clientes activos", "vsLastMonth": "vs. mes anterior", "collected": "68% cobrado", "newThisMonth": "nuevos este mes" },
+  "revenue": { "title": "Resumen de ingresos", "subtitle": "Rendimiento de tu negocio este mes", "monthly": "Mensual", "compared": "comparado con el mes anterior" },
+  "tasks": { "title": "Tareas que requieren atención", "subtitle": "Mantén tus operaciones en marcha", "invoices": "5 facturas vencidas", "invoiceDesc": "$8,240 esperando cobro", "stock": "Alerta de stock bajo", "stockDesc": "3 artículos por debajo del mínimo", "approvals": "Aprobaciones pendientes", "approvalsDesc": "8 documentos necesitan tu aprobación" },
+  "activity": { "title": "Actividad reciente", "subtitle": "Últimas actualizaciones de tu espacio", "invoice": "La factura INV-2025-0847 fue pagada", "by": "por", "order": "Nuevo pedido de venta recibido", "stock": "Transferencia de stock completada" },
+  "cash": { "title": "Flujo de caja", "subtitle": "Ingresos vs gastos", "income": "Ingresos", "expenses": "Gastos" }
+}
