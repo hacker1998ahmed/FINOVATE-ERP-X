@@ -1,4 +1,76 @@
 {
-  "actions": { "save": "حفظ", "cancel": "إلغاء", "delete": "حذف" },
-  "app": { "name": "FINOVATE ERP X" }
+  "company": {
+    "workspace": "مساحة العمل الرئيسية"
+  },
+  "navigation": {
+    "workspace": "مساحة العمل",
+    "dashboard": "لوحة التحكم",
+    "analytics": "التحليلات",
+    "operations": "العمليات",
+    "sales": "المبيعات",
+    "purchasing": "المشتريات",
+    "inventory": "المخزون",
+    "accounting": "الحسابات",
+    "organization": "المؤسسة",
+    "people": "الموظفون والموارد البشرية",
+    "customers": "العملاء",
+    "reports": "التقارير",
+    "settings": "الإعدادات"
+  },
+  "profile": {
+    "administrator": "مسؤول النظام"
+  },
+  "header": {
+    "search": "ابحث عن أي شيء…"
+  },
+  "actions": {
+    "newTransaction": "معاملة جديدة",
+    "viewAll": "عرض الكل",
+    "review": "مراجعة"
+  },
+  "dashboard": {
+    "overview": "نظرة عامة",
+    "title": "صباح الخير، أحمد <span>✦</span>",
+    "subtitle": "إليك ما يحدث في أعمالك اليوم.",
+    "period": "01 سبتمبر – 30 سبتمبر 2025"
+  },
+  "metrics": {
+    "revenue": "إجمالي الإيرادات",
+    "netProfit": "صافي الربح",
+    "outstanding": "الفواتير المستحقة",
+    "activeCustomers": "العملاء النشطون",
+    "vsLastMonth": "مقارنة بالشهر الماضي",
+    "collected": "تم تحصيل 68%",
+    "newThisMonth": "جديد هذا الشهر"
+  },
+  "revenue": {
+    "title": "نظرة عامة على الإيرادات",
+    "subtitle": "أداء أعمالك خلال هذا الشهر",
+    "monthly": "شهري",
+    "compared": "مقارنة بالشهر الماضي"
+  },
+  "tasks": {
+    "title": "مهام تحتاج إلى اهتمام",
+    "subtitle": "حافظ على سير عملياتك",
+    "invoices": "5 فواتير متأخرة",
+    "invoiceDesc": "8,240$ بانتظار التحصيل",
+    "stock": "تنبيه مخزون منخفض",
+    "stockDesc": "3 أصناف أقل من الحد الأدنى",
+    "approvals": "موافقات معلّقة",
+    "approvalsDesc": "8 مستندات تحتاج موافقتك"
+  },
+  "activity": {
+    "title": "النشاط الأخير",
+    "subtitle": "آخر التحديثات في مساحة عملك",
+    "invoice": "تم سداد الفاتورة INV-2025-0847",
+    "by": "بواسطة",
+    "order": "تم استلام أمر بيع جديد",
+    "stock": "اكتمل تحويل المخزون"
+  },
+  "cash": {
+    "title": "التدفق النقدي",
+    "subtitle": "الإيرادات مقابل المصروفات",
+    "income": "الإيرادات",
+    "expenses": "المصروفات"
+  }
 }

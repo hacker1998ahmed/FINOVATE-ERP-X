@@ -1,6 +1,42 @@
-const translations = {
-  en: { company:{workspace:'Main workspace'}, navigation:{workspace:'WORKSPACE',dashboard:'Dashboard',analytics:'Analytics',operations:'OPERATIONS',sales:'Sales',purchasing:'Purchasing',inventory:'Inventory',accounting:'Accounting',organization:'ORGANIZATION',people:'People & HR',customers:'Customers',reports:'Reports',settings:'Settings'},profile:{administrator:'System administrator'},header:{search:'Search anything…'},actions:{newTransaction:'New transaction',viewAll:'View all',review:'Review'},dashboard:{overview:'OVERVIEW',title:'Good morning, Ahmed <span>✦</span>',subtitle:'Here’s what’s happening across your business today.',period:'Sep 01 – Sep 30, 2025'},metrics:{revenue:'Total revenue',netProfit:'Net profit',outstanding:'Outstanding invoices',activeCustomers:'Active customers',vsLastMonth:'vs. last month',collected:'68% collected',newThisMonth:'new this month'},revenue:{title:'Revenue overview',subtitle:'Your business performance this month',monthly:'Monthly',compared:'compared to last month'},tasks:{title:'Tasks requiring attention',subtitle:'Keep your operations moving',invoices:'5 invoices overdue',invoiceDesc:'$8,240 awaiting collection',stock:'Low stock alert',stockDesc:'3 items are below minimum level',approvals:'Pending approvals',approvalsDesc:'8 documents need your approval'},activity:{title:'Recent activity',subtitle:'Latest updates from your workspace',invoice:'Invoice INV-2025-0847 was paid',by:'by',order:'New sales order received',stock:'Stock transfer completed'},cash:{title:'Cash flow',subtitle:'Income vs. expenses',income:'Income',expenses:'Expenses'} },
-  ar: { company:{workspace:'مساحة العمل الرئيسية'}, navigation:{workspace:'مساحة العمل',dashboard:'لوحة التحكم',analytics:'التحليلات',operations:'العمليات',sales:'المبيعات',purchasing:'المشتريات',inventory:'المخزون',accounting:'الحسابات',organization:'المؤسسة',people:'الموظفون والموارد البشرية',customers:'العملاء',reports:'التقارير',settings:'الإعدادات'},profile:{administrator:'مسؤول النظام'},header:{search:'ابحث عن أي شيء…'},actions:{newTransaction:'معاملة جديدة',viewAll:'عرض الكل',review:'مراجعة'},dashboard:{overview:'نظرة عامة',title:'صباح الخير، أحمد <span>✦</span>',subtitle:'إليك ما يحدث في أعمالك اليوم.',period:'01 سبتمبر – 30 سبتمبر 2025'},metrics:{revenue:'إجمالي الإيرادات',netProfit:'صافي الربح',outstanding:'الفواتير المستحقة',activeCustomers:'العملاء النشطون',vsLastMonth:'مقارنة بالشهر الماضي',collected:'تم تحصيل 68%',newThisMonth:'جديد هذا الشهر'},revenue:{title:'نظرة عامة على الإيرادات',subtitle:'أداء أعمالك خلال هذا الشهر',monthly:'شهري',compared:'مقارنة بالشهر الماضي'},tasks:{title:'مهام تحتاج إلى اهتمام',subtitle:'حافظ على سير عملياتك',invoices:'5 فواتير متأخرة',invoiceDesc:'8,240$ بانتظار التحصيل',stock:'تنبيه مخزون منخفض',stockDesc:'3 أصناف أقل من الحد الأدنى',approvals:'موافقات معلّقة',approvalsDesc:'8 مستندات تحتاج موافقتك'},activity:{title:'النشاط الأخير',subtitle:'آخر التحديثات في مساحة عملك',invoice:'تم سداد الفاتورة INV-2025-0847',by:'بواسطة',order:'تم استلام أمر بيع جديد',stock:'اكتمل تحويل المخزون'},cash:{title:'التدفق النقدي',subtitle:'الإيرادات مقابل المصروفات',income:'الإيرادات',expenses:'المصروفات'} }
-};
-function valueFor(object, path) { return path.split('.').reduce((value, key) => value && value[key], object); }
-function setLanguage(language) { const dictionary = translations[language] || translations.en; document.documentElement.lang = language; document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'; document.querySelectorAll('[data-i18n]').forEach((node) => { const value = valueFor(dictionary, node.dataset.i18n); if (value) node.innerHTML = value; }); document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => { const value = valueFor(dictionary, node.dataset.i18nPlaceholder); if (value) node.placeholder = value; }); localStorage.setItem('finovate-language', language); document.querySelector('#language-toggle').firstChild.textContent = language.toUpperCase() + ' '; }
+const supportedLanguages = [
+  ['ar', 'العربية', true], ['en', 'English', false], ['fr', 'Français', false], ['es', 'Español', false], ['de', 'Deutsch', false], ['it', 'Italiano', false], ['pt', 'Português', false], ['tr', 'Türkçe', false], ['ru', 'Русский', false], ['zh-CN', '简体中文', false], ['zh-TW', '繁體中文', false], ['ja', '日本語', false], ['ko', '한국어', false], ['hi', 'हिन्दी', false], ['bn', 'বাংলা', false], ['ur', 'اردو', true], ['fa', 'فارسی', true], ['id', 'Bahasa Indonesia', false], ['ms', 'Melayu', false], ['th', 'ไทย', false], ['vi', 'Tiếng Việt', false], ['nl', 'Nederlands', false], ['pl', 'Polski', false], ['uk', 'Українська', false], ['ro', 'Română', false], ['el', 'Ελληνικά', false], ['cs', 'Čeština', false], ['sv', 'Svenska', false], ['da', 'Dansk', false], ['no', 'Norsk', false], ['fi', 'Suomi', false], ['hu', 'Magyar', false], ['he', 'עברית', true], ['auto', 'Auto detect', false], ['fil', 'Filipino', false]
+];
+
+const localeCache = new Map();
+const valueFor = (object, path) => path.split('.').reduce((value, key) => value && value[key], object);
+const isRtl = (language) => supportedLanguages.find(([code]) => code === language)?.[2] ?? false;
+
+async function loadLocale(language) {
+  if (localeCache.has(language)) return localeCache.get(language);
+  const response = await fetch(`locales/${language}.json`);
+  if (!response.ok) throw new Error(`Locale ${language} is unavailable.`);
+  const dictionary = await response.json();
+  localeCache.set(language, dictionary);
+  return dictionary;
+}
+
+function translatePage(dictionary) {
+  document.querySelectorAll('[data-i18n]').forEach((node) => {
+    const value = valueFor(dictionary, node.dataset.i18n);
+    if (value) node.innerHTML = value;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => {
+    const value = valueFor(dictionary, node.dataset.i18nPlaceholder);
+    if (value) node.placeholder = value;
+  });
+}
+
+async function setLanguage(language) {
+  let dictionary;
+  try { dictionary = await loadLocale(language); } catch { dictionary = await loadLocale('en'); }
+  document.documentElement.lang = language;
+  document.documentElement.dir = isRtl(language) ? 'rtl' : 'ltr';
+  document.querySelector('#language-toggle').value = language;
+  translatePage(dictionary);
+  localStorage.setItem('finovate-language', language);
+}
+
+function populateLanguageSelector() {
+  const selector = document.querySelector('#language-toggle');
+  supportedLanguages.forEach(([code, label]) => selector.add(new Option(label, code)));
+}
