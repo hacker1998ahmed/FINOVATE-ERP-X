@@ -1,1 +1,1 @@
-Nothing should be ignored in this case, as the changes only include JavaScript source files (.js) and a markdown file (.md), which are not build artifacts, dependencies, or temporary files.
+(js/accounting.js, js/cash-bank.js, js/hr.js, IMPLEMENTATION_STATUS.md)
