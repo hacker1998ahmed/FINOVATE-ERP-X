@@ -1,0 +1,97 @@
+{
+  "login": {
+    "title": "Connexion - FINOVATE ERP X",
+    "subtitle": "Connectez-vous à votre espace de travail",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "remember": "Se souvenir de moi",
+    "forgot": "Mot de passe oublié?",
+    "submit": "Se connecter",
+    "help": "Besoin d'aide?",
+    "contact": "Contacter le support",
+    "welcome": "Bon retour",
+    "description": "Accédez à votre système complet de gestion d'entreprise avec prise en charge multi-sociétés, multi-agences et multi-devises.",
+    "feature1": "Gestion multi-sociétés",
+    "feature2": "Comptabilité avancée",
+    "feature3": "Inventaire & POS",
+    "feature4": "RH & Paie",
+    "feature5": "35+ langues"
+  },
+  "company": {
+    "workspace": "Espace de travail principal"
+  },
+  "navigation": {
+    "workspace": "ESPACE DE TRAVAIL",
+    "dashboard": "Tableau de bord",
+    "analytics": "Analytique",
+    "operations": "OPÉRATIONS",
+    "sales": "Ventes",
+    "purchasing": "Achats",
+    "inventory": "Inventaire",
+    "accounting": "Comptabilité",
+    "organization": "ORGANISATION",
+    "people": "Personnes & RH",
+    "customers": "Clients",
+    "reports": "Rapports",
+    "settings": "Paramètres"
+  },
+  "profile": {
+    "administrator": "Administrateur système"
+  },
+  "header": {
+    "search": "Rechercher…"
+  },
+  "actions": {
+    "newTransaction": "Nouvelle transaction",
+    "viewAll": "Voir tout",
+    "review": "Examiner",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer"
+  },
+  "dashboard": {
+    "overview": "APERÇU",
+    "title": "Bonjour, Ahmed <span>✦</span>",
+    "subtitle": "Voici ce qui se passe dans votre entreprise aujourd'hui.",
+    "period": "01 sep – 30 sep 2025"
+  },
+  "metrics": {
+    "revenue": "Revenu total",
+    "netProfit": "Bénéfice net",
+    "outstanding": "Factures en souffrance",
+    "activeCustomers": "Clients actifs",
+    "vsLastMonth": "par rapport au mois dernier",
+    "collected": "68% collecté",
+    "newThisMonth": "nouveau ce mois-ci"
+  },
+  "revenue": {
+    "title": "Aperçu des revenus",
+    "subtitle": "Performance de votre entreprise ce mois-ci",
+    "monthly": "Mensuel",
+    "compared": "par rapport au mois dernier"
+  },
+  "tasks": {
+    "title": "Tâches nécessitant une attention",
+    "subtitle": "Maintenez vos opérations en mouvement",
+    "invoices": "5 factures en retard",
+    "invoiceDesc": "8 240 $ en attente de collecte",
+    "stock": "Alerte stock faible",
+    "stockDesc": "3 articles sont en dessous du niveau minimum",
+    "approvals": "Approbations en attente",
+    "approvalsDesc": "8 documents ont besoin de votre approbation"
+  },
+  "activity": {
+    "title": "Activité récente",
+    "subtitle": "Dernières mises à jour de votre espace de travail",
+    "invoice": "La facture INV-2025-0847 a été payée",
+    "by": "par",
+    "order": "Nouveau bon de commande reçu",
+    "stock": "Transfert de stock terminé"
+  },
+  "cash": {
+    "title": "Flux de trésorerie",
+    "subtitle": "Revenus vs dépenses",
+    "income": "Revenus",
+    "expenses": "Dépenses"
+  }
+}

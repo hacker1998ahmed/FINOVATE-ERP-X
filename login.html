@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1f36" />
+    <title data-i18n="login.title">Login - FINOVATE ERP X</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/core.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body class="auth-page">
+    <div class="auth-container">
+      <div class="auth-panel">
+        <div class="auth-header">
+          <a href="#" class="brand auth-brand">
+            <span class="brand-mark">F</span>
+            <span><strong>FINOVATE</strong><small>ERP X</small></span>
+          </a>
+          <p class="auth-subtitle" data-i18n="login.subtitle">Sign in to your workspace</p>
+        </div>
+        
+        <form id="login-form" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="email" data-i18n="login.email">Email Address</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@company.com" />
+          </div>
+          
+          <div class="form-group">
+            <label for="password" data-i18n="login.password">Password</label>
+            <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="••••••••" />
+          </div>
+          
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="remember" name="remember" />
+              <span data-i18n="login.remember">Remember me</span>
+            </label>
+            <a href="#" class="forgot-link" data-i18n="login.forgot">Forgot password?</a>
+          </div>
+          
+          <button type="submit" class="btn-primary" id="login-btn">
+            <span data-i18n="login.submit">Sign In</span>
+            <span class="btn-loader"></span>
+          </button>
+        </form>
+        
+        <div class="auth-footer">
+          <p data-i18n="login.help">Need help?</p>
+          <a href="#" data-i18n="login.contact">Contact Support</a>
+        </div>
+        
+        <div class="language-selector-auth">
+          <select id="language-toggle" aria-label="Switch language"></select>
+        </div>
+      </div>
+      
+      <div class="auth-side">
+        <div class="auth-content">
+          <h1 data-i18n="login.welcome">Welcome Back</h1>
+          <p data-i18n="login.description">Access your complete business management system with multi-company, multi-branch, and multi-currency support.</p>
+          <ul class="feature-list">
+            <li><span>✓</span><span data-i18n="login.feature1">Multi-Company Management</span></li>
+            <li><span>✓</span><span data-i18n="login.feature2">Advanced Accounting</span></li>
+            <li><span>✓</span><span data-i18n="login.feature3">Inventory & POS</span></li>
+            <li><span>✓</span><span data-i18n="login.feature4">HR & Payroll</span></li>
+            <li><span>✓</span><span data-i18n="login.feature5">35+ Languages</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="js/localization.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>
