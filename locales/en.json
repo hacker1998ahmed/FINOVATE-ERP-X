@@ -1,0 +1,4 @@
+{
+  "actions": { "save": "Save", "cancel": "Cancel", "delete": "Delete" },
+  "app": { "name": "FINOVATE ERP X" }
+}
