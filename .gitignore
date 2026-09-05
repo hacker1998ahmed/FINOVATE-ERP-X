@@ -1,8 +1,1 @@
-(js/ai-assistant.js)
-dist/
-__pycache__/
-*.log
-harden_auth.py
-restore_backend.py
-revert_auth_compat.py
-test_api_integration.py
+Nothing should be ignored since the changes only include source files (.html, .js) without any build artifacts, dependencies, or temporary files.
