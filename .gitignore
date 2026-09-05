@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since only a single HTML file (sales.html) was added, which is a source file that should be tracked in version control.
+Nothing needs to be added to .gitignore since the changes only include HTML files (customers.html, inventory.html, purchasing.html, suppliers.html) which are source files and not build artifacts, dependencies, or temporary files.

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشتريات - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-network"></i>
+                    <span>FINOVATE ERP X</span>
+                </div>
+                <button class="toggle-btn" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i><span>لوحة التحكم</span></a></li>
+                    <li class="menu-item has-submenu">
+                        <a href="#"><i class="fas fa-users"></i><span>العملاء والموردين</span><i class="fas fa-chevron-down arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="customers.html">إدارة العملاء</a></li>
+                            <li><a href="suppliers.html">إدارة الموردين</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#"><i class="fas fa-boxes"></i><span>المخزون والمشتريات</span><i class="fas fa-chevron-down arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="inventory.html">إدارة المخزون</a></li>
+                            <li><a href="purchasing.html" class="active">المشتريات</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="sales.html"><i class="fas fa-shopping-cart"></i><span>المبيعات</span></a></li>
+                    <li><a href="accounting.html"><i class="fas fa-calculator"></i><span>المحاسبة</span></a></li>
+                    <li><a href="cash-bank.html"><i class="fas fa-university"></i><span>النقد والبنوك</span></a></li>
+                    <li><a href="assets.html"><i class="fas fa-building"></i><span>الأصول</span></a></li>
+                    <li><a href="people.html"><i class="fas fa-user-tie"></i><span>الموارد البشرية</span></a></li>
+                    <li><a href="crm.html"><i class="fas fa-handshake"></i><span>علاقات العملاء</span></a></li>
+                    <li><a href="budgeting.html"><i class="fas fa-chart-pie"></i><span>الميزانيات</span></a></li>
+                    <li><a href="manufacturing.html"><i class="fas fa-industry"></i><span>التصنيع</span></a></li>
+                    <li><a href="fleet.html"><i class="fas fa-truck"></i><span>الأسطول</span></a></li>
+                    <li><a href="projects.html"><i class="fas fa-project-diagram"></i><span>المشاريع</span></a></li>
+                    <li class="menu-item has-submenu">
+                        <a href="#"><i class="fas fa-file-alt"></i><span>التقارير والمستندات</span><i class="fas fa-chevron-down arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="reports.html">التقارير</a></li>
+                            <li><a href="documents.html">المستندات</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#"><i class="fas fa-cog"></i><span>النظام</span><i class="fas fa-chevron-down arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="backup.html">النسخ الاحتياطي</a></li>
+                            <li><a href="audit.html">التدقيق</a></li>
+                            <li><a href="analytics.html">التحليلات</a></li>
+                            <li><a href="settings.html">الإعدادات</a></li>
+                            <li><a href="ai-settings.html">إعدادات الذكاء الاصطناعي</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-right">
+                    <button class="toggle-btn mobile-toggle" id="mobileToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-box">
+                        <input type="text" placeholder="بحث عام...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="header-left">
+                    <button class="icon-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="icon-btn" id="fullscreenBtn">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <div class="notifications">
+                        <button class="icon-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge">3</span>
+                        </button>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-info">
+                            <span class="user-name">أحمد محمد</span>
+                            <span class="user-role">مدير النظام</span>
+                        </div>
+                        <img src="placeholder_user.jpg" alt="User" class="user-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%234f46e5%27%3E%3Ccircle cx=%2712%27 cy=%278%27 r=%274%27/%3E%3Cpath d=%27M12 14c-6 0-8 3-8 6v2h16v-2c0-3-2-6-8-6z%27/%3E%3C/svg%3E'">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1>إدارة المشتريات</h1>
+                        <p>متابعة طلبات الشراء والفواتير والموردين</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-outline"><i class="fas fa-download"></i> تصدير</button>
+                        <button class="btn btn-primary" onclick="openModal('addPurchaseModal')">
+                            <i class="fas fa-plus"></i> طلب شراء جديد
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>156</h3>
+                            <p>طلبات الشراء</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>142</h3>
+                            <p>مكتملة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>12</h3>
+                            <p>قيد المعالجة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>1.8M</h3>
+                            <p>قيمة المشتريات</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase Orders by Status -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>حالة طلبات الشراء</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-progress">
+                            <div class="status-item">
+                                <div class="status-label">
+                                    <span>مسودة</span>
+                                    <span class="status-count">8</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill gray" style="width: 5%"></div>
+                                </div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-label">
+                                    <span>قيد المراجعة</span>
+                                    <span class="status-count">15</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill yellow" style="width: 10%"></div>
+                                </div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-label">
+                                    <span>معتمد</span>
+                                    <span class="status-count">45</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill blue" style="width: 29%"></div>
+                                </div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-label">
+                                    <span>قيد الاستلام</span>
+                                    <span class="status-count">28</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill purple" style="width: 18%"></div>
+                                </div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-label">
+                                    <span>مكتمل</span>
+                                    <span class="status-count">60</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill green" style="width: 38%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters and Search -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>تصفية طلبات الشراء</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="filters-row">
+                            <div class="filter-group">
+                                <label>الحالة</label>
+                                <select>
+                                    <option value="">الكل</option>
+                                    <option value="draft">مسودة</option>
+                                    <option value="pending">قيد المراجعة</option>
+                                    <option value="approved">معتمد</option>
+                                    <option value="receiving">قيد الاستلام</option>
+                                    <option value="completed">مكتمل</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>المورد</label>
+                                <select>
+                                    <option value="">كل الموردين</option>
+                                    <option value="supplier1">شركة التصنيع الحديثة</option>
+                                    <option value="supplier2">مؤسسة التوريد السريع</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>من تاريخ</label>
+                                <input type="date">
+                            </div>
+                            <div class="filter-group">
+                                <label>إلى تاريخ</label>
+                                <input type="date">
+                            </div>
+                            <div class="filter-group">
+                                <label>البحث</label>
+                                <input type="text" placeholder="رقم الطلب، المورد...">
+                            </div>
+                            <button class="btn btn-primary"><i class="fas fa-filter"></i> تطبيق</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase Orders Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>طلبات الشراء</h2>
+                        <div class="table-actions">
+                            <button class="btn btn-sm btn-outline"><i class="fas fa-columns"></i> الأعمدة</button>
+                            <button class="btn btn-sm btn-outline"><i class="fas fa-download"></i> Excel</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox"></th>
+                                        <th>رقم الطلب</th>
+                                        <th>المورد</th>
+                                        <th>تاريخ الطلب</th>
+                                        <th>تاريخ التسليم المتوقع</th>
+                                        <th>إجمالي القيمة</th>
+                                        <th>الحالة</th>
+                                        <th>المستخدم</th>
+                                        <th>إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><code>PO-2025-001</code></td>
+                                        <td>
+                                            <div class="font-medium">شركة التصنيع الحديثة</div>
+                                        </td>
+                                        <td>2025-01-15</td>
+                                        <td>2025-01-25</td>
+                                        <td class="font-medium">45,000 ر.س</td>
+                                        <td><span class="badge badge-blue">معتمد</span></td>
+                                        <td>أحمد محمد</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon" title="عرض"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon" title="طباعة"><i class="fas fa-print"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><code>PO-2025-002</code></td>
+                                        <td>
+                                            <div class="font-medium">مؤسسة التوريد السريع</div>
+                                        </td>
+                                        <td>2025-01-18</td>
+                                        <td>2025-01-28</td>
+                                        <td class="font-medium">28,500 ر.س</td>
+                                        <td><span class="badge badge-purple">قيد الاستلام</span></td>
+                                        <td>سارة أحمد</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon" title="عرض"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon" title="استلام"><i class="fas fa-dolly"></i></button>
+                                                <button class="btn-icon" title="طباعة"><i class="fas fa-print"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td><code>PO-2025-003</code></td>
+                                        <td>
+                                            <div class="font-medium">شركة الخدمات المتكاملة</div>
+                                        </td>
+                                        <td>2025-01-20</td>
+                                        <td>2025-01-30</td>
+                                        <td class="font-medium">12,000 ر.س</td>
+                                        <td><span class="badge badge-yellow">قيد المراجعة</span></td>
+                                        <td>محمد علي</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon" title="عرض"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon" title="اعتماد"><i class="fas fa-check"></i></button>
+                                                <button class="btn-icon" title="رفض"><i class="fas fa-times"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination">
+                            <button class="btn btn-sm btn-outline" disabled><i class="fas fa-chevron-right"></i> السابق</button>
+                            <div class="page-numbers">
+                                <button class="btn btn-sm active">1</button>
+                                <button class="btn btn-sm">2</button>
+                                <button class="btn btn-sm">3</button>
+                                <button class="btn btn-sm">...</button>
+                                <button class="btn btn-sm">12</button>
+                            </div>
+                            <button class="btn btn-sm btn-outline">التالي <i class="fas fa-chevron-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Purchase Order Modal -->
+    <div class="modal" id="addPurchaseModal">
+        <div class="modal-content modal-xl">
+            <div class="modal-header">
+                <h2>طلب شراء جديد</h2>
+                <button class="close-btn" onclick="closeModal('addPurchaseModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addPurchaseForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>المورد *</label>
+                            <select required>
+                                <option value="">اختر المورد</option>
+                                <option value="supplier1">شركة التصنيع الحديثة</option>
+                                <option value="supplier2">مؤسسة التوريد السريع</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>تاريخ الطلب *</label>
+                            <input type="date" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>تاريخ التسليم المتوقع *</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>المستودع *</label>
+                            <select required>
+                                <option value="">اختر المستودع</option>
+                                <option value="main">المستودع الرئيسي</option>
+                                <option value="secondary">المستودع الثانوي</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>تفاصيل الأصناف</label>
+                        <div class="items-table">
+                            <table class="items-data-table">
+                                <thead>
+                                    <tr>
+                                        <th>الصنف</th>
+                                        <th width="100">الكمية</th>
+                                        <th width="120">السعر</th>
+                                        <th width="120">الإجمالي</th>
+                                        <th width="50"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select>
+                                                <option value="">اختر الصنف</option>
+                                                <option value="item1">لابتوب Dell XPS 15</option>
+                                                <option value="item2">ماوس لاسلكي Logitech</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" value="1" min="1"></td>
+                                        <td><input type="number" step="0.01" value="0.00"></td>
+                                        <td class="text-left">0.00 ر.س</td>
+                                        <td><button type="button" class="btn-icon text-red"><i class="fas fa-trash"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-sm btn-outline mt-2">
+                                <i class="fas fa-plus"></i> إضافة صنف
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>خصم</label>
+                            <input type="number" step="0.01" value="0.00" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label>ضريبة (15%)</label>
+                            <input type="number" step="0.01" value="0.00" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>ملاحظات</label>
+                        <textarea rows="3" placeholder="أي ملاحظات إضافية"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('addPurchaseModal')">إلغاء</button>
+                <button class="btn btn-outline">حفظ كمسودة</button>
+                <button class="btn btn-primary">إرسال الطلب</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/purchasing.js"></script>
+</body>
+</html>
