@@ -1,1 +1,8 @@
 (js/ai-assistant.js)
+dist/
+__pycache__/
+*.log
+harden_auth.py
+restore_backend.py
+revert_auth_compat.py
+test_api_integration.py
