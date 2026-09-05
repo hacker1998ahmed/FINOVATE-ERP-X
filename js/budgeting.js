@@ -87,7 +87,7 @@ const BudgetingModule = (() => {
           <article class="metric-card">
             <div class="metric-label"><span class="metric-icon orange">📈</span><span data-i18n="budget.variance">Variance</span></div>
             <strong class="${variance >= 0 ? 'positive' : 'negative'}">${formatCurrency(variance)}</strong>
-            <p class="${variance >= 0 ? 'up' : 'down'}">${variancePercent}% ${data-i18n="budget.vsBudget"}vs. Budget</p>
+            <p class="${variance >= 0 ? 'up' : 'down'}">${variancePercent}% <span data-i18n="budget.vsBudget">vs. Budget</span></p>
           </article>
           <article class="metric-card">
             <div class="metric-label"><span class="metric-icon rose">⚠️</span><span data-i18n="budget.overBudgetItems">Over Budget Items</span></div>
