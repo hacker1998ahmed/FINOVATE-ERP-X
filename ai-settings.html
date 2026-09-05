@@ -14,6 +14,10 @@
             <p>FINOVATE AI Assistant - Multi-Provider System</p>
         </header>
 
+        <div style="margin-bottom: 20px;">
+            <select id="language-toggle" aria-label="Switch language"></select>
+        </div>
+
         <div id="ai-settings-container" class="ai-settings">
             <!-- Settings will be rendered here by JavaScript -->
         </div>
@@ -23,17 +27,27 @@
         </div>
     </div>
 
+    <script src="js/localization.js"></script>
     <script src="js/ai-assistant.js"></script>
     <script>
         // Initialize AI settings when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof FinovateAIInstance === 'undefined') {
-                FinovateAIInstance = new FinovateAI();
-                FinovateAIInstance.loadPreferences();
+            // Populate language selector first
+            if (document.getElementById('language-toggle')) {
+                populateLanguageSelector();
+                setLanguage(localStorage.getItem('finovate-language') || 'ar');
             }
             
-            const container = document.getElementById('ai-settings-container');
-            FinovateAIInstance.renderSettingsUI(container);
+            // Wait for FinovateAI instance to be created
+            setTimeout(function() {
+                const container = document.getElementById('ai-settings-container');
+                if (window.FinovateAIInstance && container) {
+                    window.FinovateAIInstance.loadPreferences();
+                    window.FinovateAIInstance.renderSettingsUI(container);
+                } else {
+                    console.error('FinovateAI instance not found or container missing');
+                }
+            }, 100);
         });
     </script>
 </body>

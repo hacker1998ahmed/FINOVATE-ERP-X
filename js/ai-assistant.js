@@ -1337,20 +1337,35 @@ class FinovateAI {
         messagesDiv.appendChild(msgDiv);
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
+    
+    /**
+     * فتح واجهة المحادثة
+     */
+    openChat() {
+        this.renderChatInterface();
+    }
 }
+
+// إنشاء مثيل عام من FinovateAI عند تحميل الصفحة
+window.FinovateAIInstance = new FinovateAI();
 
 // دالة عامة لإرسال الاستعلامات
 async function sendAIQuery() {
+    if (!FinovateAIInstance) return;
+    
     const input = document.getElementById('ai-input');
     const message = input.value.trim();
     if (!message) return;
 
-    const ai = new FinovateAI();
-    ai.addAIMessage('user', message);
+    FinovateAIInstance.addAIMessage('user', message);
     input.value = '';
 
-    const response = await ai.chat(message);
-    ai.addAIMessage('assistant', response);
+    try {
+        const response = await FinovateAIInstance.chat(message);
+        FinovateAIInstance.addAIMessage('assistant', response);
+    } catch (error) {
+        FinovateAIInstance.addAIMessage('assistant', '❌ خطأ: ' + error.message);
+    }
 }
 
 // تصدير الفئة
