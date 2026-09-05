@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>علاقات العملاء - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-chart-line"></i> FINOVATE</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="sales.html"><i class="fas fa-shopping-cart"></i> المبيعات</a>
+                <a href="customers.html"><i class="fas fa-users"></i> العملاء</a>
+                <a href="suppliers.html"><i class="fas fa-truck"></i> الموردون</a>
+                <a href="inventory.html"><i class="fas fa-boxes"></i> المخزون</a>
+                <a href="purchasing.html"><i class="fas fa-shopping-bag"></i> المشتريات</a>
+                <a href="cash-bank.html"><i class="fas fa-university"></i> النقد والبنوك</a>
+                <a href="accounting.html"><i class="fas fa-calculator"></i> المحاسبة</a>
+                <a href="assets.html"><i class="fas fa-building"></i> الأصول</a>
+                <a href="people.html"><i class="fas fa-user-tie"></i> الموارد البشرية</a>
+                <a href="crm.html" class="active"><i class="fas fa-handshake"></i> علاقات العملاء</a>
+                <a href="budgeting.html"><i class="fas fa-file-invoice-dollar"></i> الميزانيات</a>
+                <a href="manufacturing.html"><i class="fas fa-industry"></i> التصنيع</a>
+                <a href="fleet.html"><i class="fas fa-shipping-fast"></i> الأسطول</a>
+                <a href="projects.html"><i class="fas fa-project-diagram"></i> المشاريع</a>
+                <a href="reports.html"><i class="fas fa-chart-bar"></i> التقارير</a>
+                <a href="documents.html"><i class="fas fa-folder-open"></i> المستندات</a>
+                <a href="backup.html"><i class="fas fa-database"></i> النسخ الاحتياطي</a>
+                <a href="audit.html"><i class="fas fa-search-dollar"></i> التدقيق</a>
+                <a href="analytics.html"><i class="fas fa-analytics"></i> التحليلات</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                <a href="ai-settings.html"><i class="fas fa-robot"></i> إعدادات الذكاء الاصطناعي</a>
+            </nav>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-box">
+                    <input type="text" placeholder="بحث عام...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="user-actions">
+                    <button class="icon-btn"><i class="fas fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fas fa-envelope"></i></button>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=667eea&color=fff" alt="User">
+                        <span>مدير النظام</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-header">
+                <h1><i class="fas fa-handshake"></i> إدارة علاقات العملاء (CRM)</h1>
+                <button class="btn-primary" onclick="openModal('leadModal')">
+                    <i class="fas fa-plus"></i> عميل محتمل جديد
+                </button>
+            </div>
+
+            <!-- الإحصائيات -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>العملاء المحتملين</h3>
+                        <p>156 عميل</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>فرص المبيعات</h3>
+                        <p>48 فرصة</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>مهام هذا الأسبوع</h3>
+                        <p>32 مهمة</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>معدل التحويل</h3>
+                        <p>35%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- التبويبات -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="leads">العملاء المحتملين</button>
+                    <button class="tab-btn" data-tab="opportunities">فرص المبيعات</button>
+                    <button class="tab-btn" data-tab="activities">الأنشطة</button>
+                    <button class="tab-btn" data-tab="pipeline">خط الأنابيب</button>
+                </div>
+
+                <!-- العملاء المحتملين -->
+                <div class="tab-content active" id="leads">
+                    <div class="filters-bar">
+                        <select class="filter-select">
+                            <option>جميع المصادر</option>
+                            <option>الموقع الإلكتروني</option>
+                            <option>وسائل التواصل</option>
+                            <option>إحالة</option>
+                            <option>معرض تجاري</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>جميع الحالات</option>
+                            <option>جديد</option>
+                            <option>متصل</option>
+                            <option>مؤهل</option>
+                            <option>غير مؤهل</option>
+                        </select>
+                        <input type="text" class="filter-input" placeholder="بحث باسم العميل...">
+                        <button class="btn-secondary"><i class="fas fa-filter"></i> تصفية</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>رقم العميل</th>
+                                    <th>الاسم</th>
+                                    <th>الشركة</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>الهاتف</th>
+                                    <th>المصدر</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>LEAD-001</td>
+                                    <td>خالد العتيبي</td>
+                                    <td>شركة التقنية الحديثة</td>
+                                    <td>khaled@techmodern.sa</td>
+                                    <td>0501234567</td>
+                                    <td>الموقع الإلكتروني</td>
+                                    <td><span class="status-badge active">مؤهل</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>LEAD-002</td>
+                                    <td>نورة السعيد</td>
+                                    <td>مجموعة الأعمال المتحدة</td>
+                                    <td>noura@ubg.sa</td>
+                                    <td>0559876543</td>
+                                    <td>إحالة</td>
+                                    <td><span class="status-badge warning">متصل</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>LEAD-003</td>
+                                    <td>فهد المطيري</td>
+                                    <td>مصانع الغد</td>
+                                    <td>fahad@ghadfactories.sa</td>
+                                    <td>0561122334</td>
+                                    <td>معرض تجاري</td>
+                                    <td><span class="status-badge pending">جديد</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- فرص المبيعات -->
+                <div class="tab-content" id="opportunities">
+                    <div class="kanban-board">
+                        <div class="kanban-column">
+                            <div class="kanban-header discovery">
+                                <h4>اكتشاف</h4>
+                                <span class="count">5</span>
+                            </div>
+                            <div class="kanban-cards">
+                                <div class="kanban-card">
+                                    <h5>شركة التقنية الحديثة</h5>
+                                    <p>قيمة الفرصة: 150,000 ر.س</p>
+                                    <div class="card-footer">
+                                        <span><i class="fas fa-user"></i> خالد العتيبي</span>
+                                        <span><i class="fas fa-calendar"></i> 2024-01-20</span>
+                                    </div>
+                                </div>
+                                <div class="kanban-card">
+                                    <h5>مجموعة الأعمال المتحدة</h5>
+                                    <p>قيمة الفرصة: 85,000 ر.س</p>
+                                    <div class="card-footer">
+                                        <span><i class="fas fa-user"></i> نورة السعيد</span>
+                                        <span><i class="fas fa-calendar"></i> 2024-01-18</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kanban-column">
+                            <div class="kanban-header proposal">
+                                <h4>عرض سعر</h4>
+                                <span class="count">3</span>
+                            </div>
+                            <div class="kanban-cards">
+                                <div class="kanban-card">
+                                    <h5>مصانع الغد</h5>
+                                    <p>قيمة الفرصة: 250,000 ر.س</p>
+                                    <div class="card-footer">
+                                        <span><i class="fas fa-user"></i> فهد المطيري</span>
+                                        <span><i class="fas fa-calendar"></i> 2024-01-25</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kanban-column">
+                            <div class="kanban-header negotiation">
+                                <h4>تفاوض</h4>
+                                <span class="count">2</span>
+                            </div>
+                            <div class="kanban-cards">
+                                <div class="kanban-card">
+                                    <h5>الشركة الوطنية للتجارة</h5>
+                                    <p>قيمة الفرصة: 320,000 ر.س</p>
+                                    <div class="card-footer">
+                                        <span><i class="fas fa-user"></i> أحمد الزهراني</span>
+                                        <span><i class="fas fa-calendar"></i> 2024-01-28</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kanban-column">
+                            <div class="kanban-header closed">
+                                <h4>مغلقة</h4>
+                                <span class="count">8</span>
+                            </div>
+                            <div class="kanban-cards">
+                                <div class="kanban-card success">
+                                    <h5>شركة الأفق</h5>
+                                    <p>قيمة الفرصة: 180,000 ر.س</p>
+                                    <div class="card-footer">
+                                        <span><i class="fas fa-check-circle"></i> تم الإغلاق</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الأنشطة -->
+                <div class="tab-content" id="activities">
+                    <div class="cards-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-phone-alt"></i> المكالمات</h3>
+                            <p>المجدولة اليوم: 12 مكالمة</p>
+                            <button class="btn-primary">تسجيل مكالمة</button>
+                        </div>
+                        <div class="info-card">
+                            <h3><i class="fas fa-envelope"></i> رسائل البريد</h3>
+                            <p>المرسلة هذا الأسبوع: 45 رسالة</p>
+                            <button class="btn-primary">إرسال بريد</button>
+                        </div>
+                        <div class="info-card">
+                            <h3><i class="fas fa-meeting"></i> الاجتماعات</h3>
+                            <p>المجدولة: 8 اجتماعات</p>
+                            <button class="btn-primary">جدولة اجتماع</button>
+                        </div>
+                        <div class="info-card">
+                            <h3><i class="fas fa-tasks"></i> المهام</h3>
+                            <p>القائمة: 15 مهمة</p>
+                            <button class="btn-primary">إضافة مهمة</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>نوع النشاط</th>
+                                    <th>العنوان</th>
+                                    <th>العميل/الفرصة</th>
+                                    <th>تاريخ الاستحقاق</th>
+                                    <th>الأولوية</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fas fa-phone"></i> مكالمة</td>
+                                    <td>متابعة عرض السعر</td>
+                                    <td>شركة التقنية الحديثة</td>
+                                    <td>2024-01-16</td>
+                                    <td><span class="priority high">عالية</span></td>
+                                    <td><span class="status-badge pending">قيد الانتظار</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-check"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-envelope"></i> بريد إلكتروني</td>
+                                    <td>إرسال العقد</td>
+                                    <td>مصانع الغد</td>
+                                    <td>2024-01-17</td>
+                                    <td><span class="priority medium">متوسطة</span></td>
+                                    <td><span class="status-badge active">مكتمل</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-check"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-video"></i> اجتماع</td>
+                                    <td>عرض توضيحي للنظام</td>
+                                    <td>مجموعة الأعمال المتحدة</td>
+                                    <td>2024-01-18</td>
+                                    <td><span class="priority high">عالية</span></td>
+                                    <td><span class="status-badge active">مجدول</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-check"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- خط الأنابيب -->
+                <div class="tab-content" id="pipeline">
+                    <div class="pipeline-stats">
+                        <div class="stat-item">
+                            <label>إجمالي قيمة الفرص</label>
+                            <h3>1,250,000 ر.س</h3>
+                        </div>
+                        <div class="stat-item">
+                            <label>عدد الفرص النشطة</label>
+                            <h3>18 فرصة</h3>
+                        </div>
+                        <div class="stat-item">
+                            <label>متوسط قيمة الصفقة</label>
+                            <h3>69,444 ر.س</h3>
+                        </div>
+                        <div class="stat-item">
+                            <label>معدل الفوز</label>
+                            <h3>42%</h3>
+                        </div>
+                    </div>
+                    <div class="pipeline-chart">
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-area"></i>
+                            <p>رسم بياني لخط أنابيب المبيعات</p>
+                            <small>يظهر توزيع الفرص عبر مراحل خط الأنابيب</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- نافذة إضافة عميل محتمل -->
+    <div id="leadModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>إضافة عميل محتمل جديد</h3>
+                <button class="close-modal" onclick="closeModal('leadModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>اسم الشركة</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>المصدر</label>
+                            <select class="form-control">
+                                <option>الموقع الإلكتروني</option>
+                                <option>وسائل التواصل الاجتماعي</option>
+                                <option>إحالة</option>
+                                <option>معرض تجاري</option>
+                                <option>حملة تسويقية</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>الحالة الأولية</label>
+                            <select class="form-control">
+                                <option>جديد</option>
+                                <option>متصل</option>
+                                <option>مؤهل</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>ملاحظات</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('leadModal')">إلغاء</button>
+                <button class="btn-primary">حفظ العميل المحتمل</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/utils.js"></script>
+</body>
+</html>
