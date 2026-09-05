@@ -1,2 +1,1 @@
-# No build artifacts, dependencies, or temp files detected
-# Source file only - no ignores needed
+Nothing needs to be added to .gitignore since only a single HTML file (sales.html) was added, which is a source file that should be tracked in version control.
