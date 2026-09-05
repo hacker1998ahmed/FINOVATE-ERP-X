@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1f36" />
+    <title>المبيعات - FINOVATE ERP X</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/core.css" />
+    <style>
+      .sales-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
+      .stat-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+      .stat-label { font-size: 14px; color: #64748b; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+      .stat-value { font-size: 28px; font-weight: 700; color: #0b1f36; }
+      .stat-change { font-size: 13px; margin-top: 8px; }
+      .stat-change.up { color: #10b981; }
+      .stat-change.down { color: #ef4444; }
+      .sales-toolbar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+      .sales-table-container { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow-x: auto; }
+      .sales-table { width: 100%; border-collapse: collapse; min-width: 800px; }
+      .sales-table th { background: #f8fafc; padding: 14px 16px; text-align: right; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; }
+      .sales-table td { padding: 14px 16px; border-bottom: 1px solid #f1f5f9; white-space: nowrap; }
+      .sales-table tr:hover { background: #f8fafc; }
+      .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+      .status-draft { background: #fef3c7; color: #d97706; }
+      .status-quotation { background: #dbeafe; color: #2563eb; }
+      .status-order { background: #ddd6fe; color: #7c3aed; }
+      .status-invoice { background: #dcfce7; color: #16a34a; }
+      .status-paid { background: #10b981; color: #fff; }
+      .status-cancelled { background: #fee2e2; color: #dc2626; }
+      .action-btns { display: flex; gap: 8px; }
+      .icon-btn { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; transition: background 0.2s; font-size: 16px; }
+      .icon-btn:hover { background: #f1f5f9; }
+      .filter-group { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+      .search-input { padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; min-width: 200px; }
+      .select-input { padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; background: #fff; }
+      .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+      .modal-overlay.active { display: flex; }
+      .modal { background: #fff; border-radius: 16px; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; }
+      .modal-header { padding: 20px 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+      .modal-body { padding: 24px; }
+      .modal-footer { padding: 16px 24px; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 12px; }
+      .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px; }
+      .form-group { margin-bottom: 16px; }
+      .form-group label { display: block; margin-bottom: 6px; font-weight: 500; color: #475569; }
+      .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+      .items-table { width: 100%; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin-top: 16px; }
+      .items-table th { background: #f8fafc; padding: 12px; text-align: right; font-weight: 600; }
+      .items-table td { padding: 12px; border-top: 1px solid #e2e8f0; }
+      .totals-section { background: #f8fafc; padding: 16px; border-radius: 8px; margin-top: 16px; }
+      .total-row { display: flex; justify-content: space-between; padding: 8px 0; }
+      .total-row.final { font-weight: 700; font-size: 18px; border-top: 2px solid #e2e8f0; margin-top: 8px; padding-top: 12px; }
+      .button { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+      .button.primary { background: #5865df; color: #fff; }
+      .button.secondary { background: #f1f5f9; color: #475569; }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="index.html"><span class="brand-mark">F</span><span><strong>FINOVATE</strong><small>ERP X</small></span></a>
+        <div class="company-switcher"><span class="company-avatar">A</span><span><b>Ahmed EG</b><small>مساحة العمل</small></span><span class="chevron">⌄</span></div>
+        <nav class="nav-list">
+          <p>مساحة العمل</p>
+          <a href="index.html"><span>▦</span>لوحة التحكم</a>
+          <a href="analytics.html"><span>◔</span>التحليلات</a>
+          <p>العمليات</p>
+          <a href="sales.html" class="active"><span>↗</span>المبيعات</a>
+          <a href="purchasing.html"><span>▣</span>المشتريات</a>
+          <a href="inventory.html"><span>▤</span>المخزون</a>
+          <a href="manufacturing.html"><span>⚙</span>التصنيع</a>
+          <a href="fleet.html"><span>🚚</span>الأسطول</a>
+          <a href="projects.html"><span>📋</span>المشاريع</a>
+          <p>المالية</p>
+          <a href="accounting.html"><span>▤</span>الحسابات</a>
+          <a href="cash-bank.html"><span>💰</span>النقد والبنوك</a>
+          <a href="assets.html"><span>🏢</span>الأصول</a>
+          <a href="budgeting.html"><span>📊</span>الميزانية</a>
+          <p>المؤسسة</p>
+          <a href="people.html"><span>♙</span>الموظفون</a>
+          <a href="customers.html"><span>♧</span>العملاء</a>
+          <a href="crm.html"><span>🤝</span>إدارة العلاقات</a>
+          <p>النظام</p>
+          <a href="reports.html"><span>▥</span>التقارير</a>
+          <a href="documents.html"><span>📁</span>المستندات</a>
+          <a href="backup.html"><span>💾</span>النسخ الاحتياطي</a>
+          <a href="audit.html"><span>🔍</span>سجل التدقيق</a>
+        </nav>
+        <div class="sidebar-footer"><a href="settings.html"><span>⚙</span>الإعدادات</a><div class="profile"><span class="profile-avatar">AM</span><span><b>Ahmed Mostafa</b><small>مدير النظام</small></span></div></div>
+      </aside>
+      <main>
+        <header class="topbar">
+          <button class="mobile-menu">☰</button>
+          <div class="search"><span>⌕</span><input placeholder="ابحث..." /></div>
+          <div class="top-actions">
+            <select class="language-select" id="language-toggle"></select>
+            <span class="top-avatar">AM</span>
+          </div>
+        </header>
+        
+        <section class="page-header">
+          <div>
+            <p class="eyebrow">نظرة عامة</p>
+            <h1>إدارة المبيعات</h1>
+            <p>تابع الفواتير والعروض وطلبات العملاء</p>
+          </div>
+          <div class="header-actions">
+            <button class="button secondary" id="export-btn">📥 تصدير</button>
+            <button class="button primary" id="new-sale-btn">+ فاتورة جديدة</button>
+          </div>
+        </section>
+
+        <div class="sales-stats">
+          <article class="stat-card">
+            <div class="stat-label"><span style="color:#5865df">↗</span>إجمالي الإيرادات</div>
+            <div class="stat-value">$128,430</div>
+            <div class="stat-change up">↗ 12.5%</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label"><span style="color:#10b981">✓</span>الفواتير المدفوعة</div>
+            <div class="stat-value">156</div>
+            <div class="stat-change up">↗ 8.2%</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label"><span style="color:#f59e0b">⏳</span>الفواتير المعلقة</div>
+            <div class="stat-value">23</div>
+            <div class="stat-change down">↘ 3.1%</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label"><span style="color:#ef4444">!</span>الفواتير المتأخرة</div>
+            <div class="stat-value">5</div>
+            <div class="stat-change down">↘ 2</div>
+          </article>
+        </div>
+
+        <div class="sales-toolbar">
+          <div class="filter-group">
+            <input type="text" class="search-input" id="sales-search" placeholder="بحث برقم الفاتورة أو العميل..." />
+            <select class="select-input" id="status-filter">
+              <option value="">جميع الحالات</option>
+              <option value="draft">مسودة</option>
+              <option value="quotation">عرض سعر</option>
+              <option value="order">طلب بيع</option>
+              <option value="invoice">فاتورة</option>
+              <option value="paid">مدفوع</option>
+              <option value="cancelled">ملغي</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sales-table-container">
+          <table class="sales-table">
+            <thead>
+              <tr>
+                <th>رقم الفاتورة</th>
+                <th>العميل</th>
+                <th>التاريخ</th>
+                <th>تاريخ الاستحقاق</th>
+                <th>الحالة</th>
+                <th>الإجمالي</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="sales-table-body">
+              <tr>
+                <td>INV-2025-0847</td>
+                <td>Nile Trading Co.</td>
+                <td>2025-09-15</td>
+                <td>2025-10-15</td>
+                <td><span class="status-badge status-paid">مدفوع</span></td>
+                <td>$4,200.00</td>
+                <td><div class="action-btns"><button class="icon-btn" title="عرض">👁️</button><button class="icon-btn" title="تعديل">✏️</button><button class="icon-btn" title="طباعة">🖨️</button><button class="icon-btn" title="حذف">🗑️</button></div></td>
+              </tr>
+              <tr>
+                <td>INV-2025-0846</td>
+                <td>Cairo Electronics</td>
+                <td>2025-09-14</td>
+                <td>2025-10-14</td>
+                <td><span class="status-badge status-invoice">فاتورة</span></td>
+                <td>$1,850.00</td>
+                <td><div class="action-btns"><button class="icon-btn" title="عرض">👁️</button><button class="icon-btn" title="تعديل">✏️</button><button class="icon-btn" title="طباعة">🖨️</button><button class="icon-btn" title="حذف">🗑️</button></div></td>
+              </tr>
+              <tr>
+                <td>QUO-2025-0234</td>
+                <td>Alexandria Industries</td>
+                <td>2025-09-13</td>
+                <td>2025-09-27</td>
+                <td><span class="status-badge status-quotation">عرض سعر</span></td>
+                <td>$12,500.00</td>
+                <td><div class="action-btns"><button class="icon-btn" title="عرض">👁️</button><button class="icon-btn" title="تعديل">✏️</button><button class="icon-btn" title="طباعة">🖨️</button><button class="icon-btn" title="حذف">🗑️</button></div></td>
+              </tr>
+              <tr>
+                <td>ORD-2025-0512</td>
+                <td>Giza Manufacturing</td>
+                <td>2025-09-12</td>
+                <td>2025-09-26</td>
+                <td><span class="status-badge status-order">طلب بيع</span></td>
+                <td>$8,750.00</td>
+                <td><div class="action-btns"><button class="icon-btn" title="عرض">👁️</button><button class="icon-btn" title="تعديل">✏️</button><button class="icon-btn" title="طباعة">🖨️</button><button class="icon-btn" title="حذف">🗑️</button></div></td>
+              </tr>
+              <tr>
+                <td>DRAFT-2025-0089</td>
+                <td>Luxor Hotels</td>
+                <td>2025-09-11</td>
+                <td>-</td>
+                <td><span class="status-badge status-draft">مسودة</span></td>
+                <td>$3,200.00</td>
+                <td><div class="action-btns"><button class="icon-btn" title="عرض">👁️</button><button class="icon-btn" title="تعديل">✏️</button><button class="icon-btn" title="طباعة">🖨️</button><button class="icon-btn" title="حذف">🗑️</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <!-- New Sale Modal -->
+    <div class="modal-overlay" id="new-sale-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>فاتورة جديدة</h2>
+          <button class="icon-btn" onclick="closeModal('new-sale-modal')">✕</button>
+        </div>
+        <div class="modal-body">
+          <form id="new-sale-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>النوع</label>
+                <select id="sale-type">
+                  <option value="invoice">فاتورة</option>
+                  <option value="quotation">عرض سعر</option>
+                  <option value="order">طلب بيع</option>
+                  <option value="draft">مسودة</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>العميل</label>
+                <select id="sale-customer" required>
+                  <option value="">اختر عميل...</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>التاريخ</label>
+                <input type="date" id="sale-date" required />
+              </div>
+              <div class="form-group">
+                <label>تاريخ الاستحقاق</label>
+                <input type="date" id="sale-due-date" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>العناصر</label>
+              <table class="items-table">
+                <thead><tr><th>المنتج</th><th>الكمية</th><th>السعر</th><th>الخصم</th><th>الإجمالي</th><th></th></tr></thead>
+                <tbody id="sale-items">
+                  <tr>
+                    <td><select class="product-select"><option>اختر منتج...</option></select></td>
+                    <td><input type="number" value="1" min="1" class="qty-input" style="width:80px" /></td>
+                    <td><input type="number" value="0" min="0" step="0.01" class="price-input" style="width:100px" /></td>
+                    <td><input type="number" value="0" min="0" step="0.01" class="discount-input" style="width:80px" /></td>
+                    <td class="item-total">$0.00</td>
+                    <td><button type="button" class="icon-btn" onclick="this.parentElement.parentElement.remove()">🗑️</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button type="button" class="button secondary" id="add-item-btn" style="margin-top:12px;">+ إضافة عنصر</button>
+            </div>
+            <div class="totals-section">
+              <div class="total-row"><span>المجموع الفرعي:</span><span id="subtotal">$0.00</span></div>
+              <div class="total-row"><span>الضريبة (14%):</span><span id="tax-amount">$0.00</span></div>
+              <div class="total-row"><span>الخصم:</span><span id="discount-amount">$0.00</span></div>
+              <div class="total-row final"><span>الإجمالي:</span><span id="total-amount">$0.00</span></div>
+            </div>
+            <div class="form-group" style="margin-top:16px;">
+              <label>ملاحظات</label>
+              <textarea id="sale-notes" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="button secondary" onclick="closeModal('new-sale-modal')">إلغاء</button>
+          <button class="button primary" id="save-sale-btn">حفظ</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" style="position:fixed;bottom:20px;left:20px;padding:12px 24px;border-radius:8px;color:#fff;display:none;z-index:2000;"></div>
+    <script src="config.js"></script>
+    <script src="js/localization.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/customers.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/sales.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        if (document.getElementById('language-toggle')) {
+          populateLanguageSelector();
+          setLanguage(localStorage.getItem('finovate-language') || 'ar');
+        }
+        if (!AuthModule || !AuthModule.isAuthenticated()) { window.location.href = 'login.html'; return; }
+        document.getElementById('new-sale-btn')?.addEventListener('click', function() { document.getElementById('new-sale-modal').classList.add('active'); });
+        document.getElementById('add-item-btn')?.addEventListener('click', addItemRow);
+        document.getElementById('save-sale-btn')?.addEventListener('click', saveSale);
+        loadCustomers();
+      });
+      function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+      function addItemRow() {
+        var tbody = document.getElementById('sale-items');
+        var row = document.createElement('tr');
+        row.innerHTML = '<td><select class="product-select"><option>اختر منتج...</option></select></td><td><input type="number" value="1" min="1" class="qty-input" style="width:80px"/></td><td><input type="number" value="0" min="0" step="0.01" class="price-input" style="width:100px"/></td><td><input type="number" value="0" min="0" step="0.01" class="discount-input" style="width:80px"/></td><td class="item-total">$0.00</td><td><button type="button" class="icon-btn" onclick="this.parentElement.parentElement.remove()">🗑️</button></td>';
+        tbody.appendChild(row);
+      }
+      function loadCustomers() {
+        var customerSelect = document.getElementById('sale-customer');
+        var customers = [{id:1,name:'Nile Trading Co.'},{id:2,name:'Cairo Electronics'},{id:3,name:'Alexandria Industries'}];
+        customers.forEach(function(c) { var o=document.createElement('option'); o.value=c.id; o.textContent=c.name; customerSelect.appendChild(o); });
+      }
+      function saveSale() { showToast('تم حفظ الفاتورة بنجاح','success'); closeModal('new-sale-modal'); }
+      function showToast(msg, type) {
+        var t = document.querySelector('.toast');
+        t.textContent = msg;
+        t.style.background = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#0b1f36';
+        t.style.display = 'block';
+        setTimeout(function() { t.style.display = 'none'; }, 3000);
+      }
+    </script>
+  </body>
+</html>
