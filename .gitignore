@@ -1,1 +1,7 @@
-Nothing needs to be added to .gitignore since the changes only include HTML files (customers.html, inventory.html, purchasing.html, suppliers.html) which are source files and not build artifacts, dependencies, or temporary files.
+```html
+<!-- # Do not ignore HTML files as they appear to be main project files -->
+<!-- # No build artifacts, dependencies, or temp files detected in changes -->
+<!-- # Only source HTML files present -->
+
+<!-- Keep .gitignore empty since only source files are present -->
+```

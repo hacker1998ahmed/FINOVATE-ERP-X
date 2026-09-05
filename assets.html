@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأصول - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-chart-line"></i> FINOVATE</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="sales.html"><i class="fas fa-shopping-cart"></i> المبيعات</a>
+                <a href="customers.html"><i class="fas fa-users"></i> العملاء</a>
+                <a href="suppliers.html"><i class="fas fa-truck"></i> الموردون</a>
+                <a href="inventory.html"><i class="fas fa-boxes"></i> المخزون</a>
+                <a href="purchasing.html"><i class="fas fa-shopping-bag"></i> المشتريات</a>
+                <a href="cash-bank.html"><i class="fas fa-university"></i> النقد والبنوك</a>
+                <a href="accounting.html"><i class="fas fa-calculator"></i> المحاسبة</a>
+                <a href="assets.html" class="active"><i class="fas fa-building"></i> الأصول</a>
+                <a href="people.html"><i class="fas fa-user-tie"></i> الموارد البشرية</a>
+                <a href="crm.html"><i class="fas fa-handshake"></i> علاقات العملاء</a>
+                <a href="budgeting.html"><i class="fas fa-file-invoice-dollar"></i> الميزانيات</a>
+                <a href="manufacturing.html"><i class="fas fa-industry"></i> التصنيع</a>
+                <a href="fleet.html"><i class="fas fa-shipping-fast"></i> الأسطول</a>
+                <a href="projects.html"><i class="fas fa-project-diagram"></i> المشاريع</a>
+                <a href="reports.html"><i class="fas fa-chart-bar"></i> التقارير</a>
+                <a href="documents.html"><i class="fas fa-folder-open"></i> المستندات</a>
+                <a href="backup.html"><i class="fas fa-database"></i> النسخ الاحتياطي</a>
+                <a href="audit.html"><i class="fas fa-search-dollar"></i> التدقيق</a>
+                <a href="analytics.html"><i class="fas fa-analytics"></i> التحليلات</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                <a href="ai-settings.html"><i class="fas fa-robot"></i> إعدادات الذكاء الاصطناعي</a>
+            </nav>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-box">
+                    <input type="text" placeholder="بحث عام...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="user-actions">
+                    <button class="icon-btn"><i class="fas fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fas fa-envelope"></i></button>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=667eea&color=fff" alt="User">
+                        <span>مدير النظام</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-header">
+                <h1><i class="fas fa-building"></i> إدارة الأصول</h1>
+                <button class="btn-primary" onclick="openModal('assetModal')">
+                    <i class="fas fa-plus"></i> أصل جديد
+                </button>
+            </div>
+
+            <!-- الإحصائيات -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>إجمالي الأصول</h3>
+                        <p>156 أصل</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>القيمة الدفترية</h3>
+                        <p>8,750,000 ر.س</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-chart-line-down"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>الإهلاك السنوي</h3>
+                        <p>450,000 ر.س</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>أعمال صيانة</h3>
+                        <p>12 عملية</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- التبويبات -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="fixed-assets">الأصول الثابتة</button>
+                    <button class="tab-btn" data-tab="depreciation">الإهلاك</button>
+                    <button class="tab-btn" data-tab="maintenance">الصيانة</button>
+                    <button class="tab-btn" data-tab="disposal">التخلص من الأصول</button>
+                </div>
+
+                <!-- الأصول الثابتة -->
+                <div class="tab-content active" id="fixed-assets">
+                    <div class="filters-bar">
+                        <select class="filter-select">
+                            <option>جميع الفئات</option>
+                            <option>مباني وأراضي</option>
+                            <option>آلات ومعدات</option>
+                            <option>مركبات</option>
+                            <option>أثاث ومكاتب</option>
+                            <option>أجهزة حاسوب</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>جميع الحالات</option>
+                            <option>نشط</option>
+                            <option>خارج الخدمة</option>
+                            <option>للبيع</option>
+                        </select>
+                        <button class="btn-secondary"><i class="fas fa-filter"></i> تصفية</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>رمز الأصل</th>
+                                    <th>اسم الأصل</th>
+                                    <th>الفئة</th>
+                                    <th>تاريخ الشراء</th>
+                                    <th>التكلفة الأصلية</th>
+                                    <th>الإهلاك المتراكم</th>
+                                    <th>القيمة الدفترية</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FA-001</td>
+                                    <td>مبنى المقر الرئيسي</td>
+                                    <td>مباني وأراضي</td>
+                                    <td>2020-01-15</td>
+                                    <td>3,500,000 ر.س</td>
+                                    <td>350,000 ر.س</td>
+                                    <td>3,150,000 ر.س</td>
+                                    <td><span class="status-badge active">نشط</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>FA-002</td>
+                                    <td>آلة تصنيع CNC</td>
+                                    <td>آلات ومعدات</td>
+                                    <td>2021-06-20</td>
+                                    <td>850,000 ر.س</td>
+                                    <td>212,500 ر.س</td>
+                                    <td>637,500 ر.س</td>
+                                    <td><span class="status-badge active">نشط</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>FA-003</td>
+                                    <td>شاحنة نقل</td>
+                                    <td>مركبات</td>
+                                    <td>2022-03-10</td>
+                                    <td>180,000 ر.س</td>
+                                    <td>72,000 ر.س</td>
+                                    <td>108,000 ر.س</td>
+                                    <td><span class="status-badge warning">صيانة</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>FA-004</td>
+                                    <td>أجهزة حاسوب (10 وحدات)</td>
+                                    <td>أجهزة حاسوب</td>
+                                    <td>2023-01-05</td>
+                                    <td>50,000 ر.س</td>
+                                    <td>12,500 ر.س</td>
+                                    <td>37,500 ر.س</td>
+                                    <td><span class="status-badge active">نشط</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- الإهلاك -->
+                <div class="tab-content" id="depreciation">
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <p>يتم حساب الإهلاك تلقائياً وفقاً لطريقة القسط الثابت</p>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>الأصل</th>
+                                    <th>طريقة الإهلاك</th>
+                                    <th>العمر الإنتاجي</th>
+                                    <th>معدل الإهلاك</th>
+                                    <th>إهلاك الشهر</th>
+                                    <th>إهلاك متراكم</th>
+                                    <th>القيمة المتبقية</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>مبنى المقر الرئيسي</td>
+                                    <td>قسط ثابت</td>
+                                    <td>50 سنة</td>
+                                    <td>2% سنوياً</td>
+                                    <td>5,833 ر.س</td>
+                                    <td>350,000 ر.س</td>
+                                    <td>3,150,000 ر.س</td>
+                                </tr>
+                                <tr>
+                                    <td>آلة تصنيع CNC</td>
+                                    <td>قسط ثابت</td>
+                                    <td>10 سنوات</td>
+                                    <td>10% سنوياً</td>
+                                    <td>7,083 ر.س</td>
+                                    <td>212,500 ر.س</td>
+                                    <td>637,500 ر.س</td>
+                                </tr>
+                                <tr>
+                                    <td>شاحنة نقل</td>
+                                    <td>قسط ثابت</td>
+                                    <td>5 سنوات</td>
+                                    <td>20% سنوياً</td>
+                                    <td>3,000 ر.س</td>
+                                    <td>72,000 ر.س</td>
+                                    <td>108,000 ر.س</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-primary"><i class="fas fa-calculator"></i> تشغيل الإهلاك للشهر</button>
+                        <button class="btn-secondary"><i class="fas fa-download"></i> تقرير الإهلاك</button>
+                    </div>
+                </div>
+
+                <!-- الصيانة -->
+                <div class="tab-content" id="maintenance">
+                    <div class="cards-grid">
+                        <div class="card maintenance-card">
+                            <h4><i class="fas fa-exclamation-triangle"></i> صيانة عاجلة</h4>
+                            <p>شاحنة النقل - FA-003</p>
+                            <span class="date">2024-01-15</span>
+                            <button class="btn-warning">متابعة</button>
+                        </div>
+                        <div class="card maintenance-card">
+                            <h4><i class="fas fa-calendar-alt"></i> صيانة دورية</h4>
+                            <p>آلة CNC - FA-002</p>
+                            <span class="date">2024-01-20</span>
+                            <button class="btn-primary">جدولة</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>رقم الطلب</th>
+                                    <th>الأصل</th>
+                                    <th>نوع الصيانة</th>
+                                    <th>تاريخ الطلب</th>
+                                    <th>المورد</th>
+                                    <th>التكلفة</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>MNT-2024-001</td>
+                                    <td>شاحنة نقل</td>
+                                    <td>إصلاحات</td>
+                                    <td>2024-01-15</td>
+                                    <td>ورشة السيارات</td>
+                                    <td>5,000 ر.س</td>
+                                    <td><span class="status-badge pending">قيد التنفيذ</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>MNT-2024-002</td>
+                                    <td>آلة CNC</td>
+                                    <td>وقائية</td>
+                                    <td>2024-01-10</td>
+                                    <td>الشركة المصنعة</td>
+                                    <td>2,500 ر.س</td>
+                                    <td><span class="status-badge active">مكتمل</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- التخلص من الأصول -->
+                <div class="tab-content" id="disposal">
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <p>سجل عمليات بيع أو استبعاد الأصول الثابتة</p>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>رقم العملية</th>
+                                    <th>الأصل</th>
+                                    <th>نوع العملية</th>
+                                    <th>تاريخ العملية</th>
+                                    <th>سعر البيع</th>
+                                    <th>القيمة الدفترية</th>
+                                    <th>الربح/الخسارة</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DSP-2023-005</td>
+                                    <td>سيارة موديل 2018</td>
+                                    <td>بيع</td>
+                                    <td>2023-12-15</td>
+                                    <td>45,000 ر.س</td>
+                                    <td>40,000 ر.س</td>
+                                    <td class="text-success">+5,000 ر.س</td>
+                                    <td><span class="status-badge active">مكتمل</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DSP-2023-004</td>
+                                    <td>أثاث مكتبي قديم</td>
+                                    <td>استبعاد</td>
+                                    <td>2023-11-20</td>
+                                    <td>0 ر.س</td>
+                                    <td>8,000 ر.س</td>
+                                    <td class="text-danger">-8,000 ر.س</td>
+                                    <td><span class="status-badge active">مكتمل</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 20px;">
+                        <i class="fas fa-trash-alt"></i> تسجيل عملية تخلص جديدة
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- نافذة إضافة أصل -->
+    <div id="assetModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>إضافة أصل جديد</h3>
+                <button class="close-modal" onclick="closeModal('assetModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>اسم الأصل</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>رمز الأصل</label>
+                            <input type="text" class="form-control" placeholder="تلقائي">
+                        </div>
+                        <div class="form-group">
+                            <label>الفئة</label>
+                            <select class="form-control">
+                                <option>مباني وأراضي</option>
+                                <option>آلات ومعدات</option>
+                                <option>مركبات</option>
+                                <option>أثاث ومكاتب</option>
+                                <option>أجهزة حاسوب</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>الموقع</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>تاريخ الشراء</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>المورد</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>التكلفة الأصلية</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>القيمة المتبقية</label>
+                            <input type="number" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>العمر الإنتاجي (سنوات)</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>طريقة الإهلاك</label>
+                            <select class="form-control">
+                                <option>قسط ثابت</option>
+                                <option>رصيد متناقص</option>
+                                <option>وحدات الإنتاج</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>ملاحظات</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('assetModal')">إلغاء</button>
+                <button class="btn-primary">حفظ الأصل</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/utils.js"></script>
+</body>
+</html>

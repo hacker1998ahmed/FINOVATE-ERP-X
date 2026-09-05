@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الميزانيات - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-chart-line"></i> FINOVATE</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="sales.html"><i class="fas fa-shopping-cart"></i> المبيعات</a>
+                <a href="customers.html"><i class="fas fa-users"></i> العملاء</a>
+                <a href="suppliers.html"><i class="fas fa-truck"></i> الموردون</a>
+                <a href="inventory.html"><i class="fas fa-boxes"></i> المخزون</a>
+                <a href="purchasing.html"><i class="fas fa-shopping-bag"></i> المشتريات</a>
+                <a href="cash-bank.html"><i class="fas fa-university"></i> النقد والبنوك</a>
+                <a href="accounting.html"><i class="fas fa-calculator"></i> المحاسبة</a>
+                <a href="assets.html"><i class="fas fa-building"></i> الأصول</a>
+                <a href="people.html"><i class="fas fa-user-tie"></i> الموارد البشرية</a>
+                <a href="crm.html"><i class="fas fa-handshake"></i> علاقات العملاء</a>
+                <a href="budgeting.html" class="active"><i class="fas fa-file-invoice-dollar"></i> الميزانيات</a>
+                <a href="manufacturing.html"><i class="fas fa-industry"></i> التصنيع</a>
+                <a href="fleet.html"><i class="fas fa-shipping-fast"></i> الأسطول</a>
+                <a href="projects.html"><i class="fas fa-project-diagram"></i> المشاريع</a>
+                <a href="reports.html"><i class="fas fa-chart-bar"></i> التقارير</a>
+                <a href="documents.html"><i class="fas fa-folder-open"></i> المستندات</a>
+                <a href="backup.html"><i class="fas fa-database"></i> النسخ الاحتياطي</a>
+                <a href="audit.html"><i class="fas fa-search-dollar"></i> التدقيق</a>
+                <a href="analytics.html"><i class="fas fa-analytics"></i> التحليلات</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                <a href="ai-settings.html"><i class="fas fa-robot"></i> إعدادات الذكاء الاصطناعي</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-box">
+                    <input type="text" placeholder="بحث عام...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="user-actions">
+                    <button class="icon-btn"><i class="fas fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fas fa-envelope"></i></button>
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=667eea&color=fff" alt="User">
+                        <span>مدير النظام</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-header">
+                <h1><i class="fas fa-file-invoice-dollar"></i> إدارة الميزانيات</h1>
+                <button class="btn-primary" onclick="openModal('budgetModal')">
+                    <i class="fas fa-plus"></i> ميزانية جديدة
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>ميزانية 2024</h3>
+                        <p>12,500,000 ر.س</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>المنفذ حتى الآن</h3>
+                        <p>3,250,000 ر.س (26%)</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>نسبة الانحراف</h3>
+                        <p>+2.5%</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>فترة الميزانية</h3>
+                        <p>يناير - ديسمبر 2024</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="budgets">الميزانيات</button>
+                    <button class="tab-btn" data-tab="departments">ميزانيات الأقسام</button>
+                    <button class="tab-btn" data-tab="comparison">المقارنة</button>
+                </div>
+
+                <div class="tab-content active" id="budgets">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>رمز الميزانية</th>
+                                    <th>اسم الميزانية</th>
+                                    <th>السنة المالية</th>
+                                    <th>الإجمالي المعتمد</th>
+                                    <th>المنفذ</th>
+                                    <th>المتبقي</th>
+                                    <th>النسبة</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>BUD-2024-001</td>
+                                    <td>ميزانية التشغيل 2024</td>
+                                    <td>2024</td>
+                                    <td>8,500,000 ر.س</td>
+                                    <td>2,125,000 ر.س</td>
+                                    <td>6,375,000 ر.س</td>
+                                    <td>25%</td>
+                                    <td><span class="status-badge active">نشط</span></td>
+                                </tr>
+                                <tr>
+                                    <td>BUD-2024-002</td>
+                                    <td>ميزانية التسويق</td>
+                                    <td>2024</td>
+                                    <td>1,500,000 ر.س</td>
+                                    <td>450,000 ر.س</td>
+                                    <td>1,050,000 ر.س</td>
+                                    <td>30%</td>
+                                    <td><span class="status-badge active">نشط</span></td>
+                                </tr>
+                                <tr>
+                                    <td>BUD-2024-003</td>
+                                    <td>ميزانية التطوير</td>
+                                    <td>2024</td>
+                                    <td>2,500,000 ر.س</td>
+                                    <td>675,000 ر.س</td>
+                                    <td>1,825,000 ر.س</td>
+                                    <td>27%</td>
+                                    <td><span class="status-badge active">نشط</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="departments">
+                    <div class="cards-grid">
+                        <div class="info-card">
+                            <h3>الإدارة</h3>
+                            <p>الميزانية: 2,000,000 ر.س</p>
+                            <p>المنفذ: 500,000 ر.س</p>
+                            <div class="progress-bar"><div class="progress" style="width: 25%"></div></div>
+                        </div>
+                        <div class="info-card">
+                            <h3>المبيعات</h3>
+                            <p>الميزانية: 3,500,000 ر.س</p>
+                            <p>المنفذ: 980,000 ر.س</p>
+                            <div class="progress-bar"><div class="progress" style="width: 28%"></div></div>
+                        </div>
+                        <div class="info-card">
+                            <h3>التسويق</h3>
+                            <p>الميزانية: 1,500,000 ر.س</p>
+                            <p>المنفذ: 450,000 ر.س</p>
+                            <div class="progress-bar"><div class="progress" style="width: 30%"></div></div>
+                        </div>
+                        <div class="info-card">
+                            <h3>تقنية المعلومات</h3>
+                            <p>الميزانية: 2,000,000 ر.س</p>
+                            <p>المنفذ: 540,000 ر.س</p>
+                            <div class="progress-bar"><div class="progress" style="width: 27%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="comparison">
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <p>مقارنة الأداء الفعلي مع الميزانية المعتمدة</p>
+                    </div>
+                    <div class="chart-placeholder">
+                        <i class="fas fa-chart-bar"></i>
+                        <p>رسم بياني للمقارنة بين الميزانية والتنفيذ الفعلي</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="budgetModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>إضافة ميزانية جديدة</h3>
+                <button class="close-modal" onclick="closeModal('budgetModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>اسم الميزانية</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>السنة المالية</label>
+                            <input type="number" class="form-control" value="2024">
+                        </div>
+                        <div class="form-group">
+                            <label>القسم</label>
+                            <select class="form-control">
+                                <option>الإدارة</option>
+                                <option>المبيعات</option>
+                                <option>التسويق</option>
+                                <option>تقنية المعلومات</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>الإجمالي</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('budgetModal')">إلغاء</button>
+                <button class="btn-primary">حفظ الميزانية</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/utils.js"></script>
+</body>
+</html>
