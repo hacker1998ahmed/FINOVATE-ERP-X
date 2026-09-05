@@ -10,11 +10,23 @@
     "sales": "Sales",
     "purchasing": "Purchasing",
     "inventory": "Inventory",
+    "manufacturing": "Manufacturing",
+    "fleet": "Fleet",
+    "projects": "Projects",
+    "financial": "FINANCIAL",
     "accounting": "Accounting",
+    "cashBank": "Cash & Banks",
+    "assets": "Assets",
+    "budget": "Budget",
     "organization": "ORGANIZATION",
     "people": "People & HR",
     "customers": "Customers",
+    "crm": "CRM",
+    "system": "SYSTEM",
     "reports": "Reports",
+    "documents": "Documents",
+    "backup": "Backup",
+    "audit": "Audit Trail",
     "settings": "Settings"
   },
   "profile": {
@@ -31,7 +43,7 @@
   "dashboard": {
     "overview": "OVERVIEW",
     "title": "Good morning, Ahmed <span>✦</span>",
-    "subtitle": "Here’s what’s happening across your business today.",
+    "subtitle": "Here's what's happening across your business today.",
     "period": "Sep 01 – Sep 30, 2025"
   },
   "metrics": {
@@ -72,5 +84,23 @@
     "subtitle": "Income vs. expenses",
     "income": "Income",
     "expenses": "Expenses"
+  },
+  "login": {
+    "title": "Login - FINOVATE ERP X",
+    "subtitle": "Sign in to your workspace",
+    "email": "Email Address",
+    "password": "Password",
+    "remember": "Remember me",
+    "forgot": "Forgot password?",
+    "submit": "Sign In",
+    "help": "Need help?",
+    "contact": "Contact Support",
+    "welcome": "Welcome Back",
+    "description": "Access your complete business management system with multi-company, multi-branch, and multi-currency support.",
+    "feature1": "Multi-Company Management",
+    "feature2": "Advanced Accounting",
+    "feature3": "Inventory & POS",
+    "feature4": "HR & Payroll",
+    "feature5": "35+ Languages"
   }
 }

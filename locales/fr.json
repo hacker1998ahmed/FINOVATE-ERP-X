@@ -33,7 +33,19 @@
     "people": "Personnes & RH",
     "customers": "Clients",
     "reports": "Rapports",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "manufacturing": "Manufacturing",
+    "fleet": "Fleet",
+    "projects": "Projects",
+    "financial": "FINANCIAL",
+    "cashBank": "Cash & Banks",
+    "assets": "Assets",
+    "budget": "Budget",
+    "crm": "CRM",
+    "system": "SYSTEM",
+    "documents": "Documents",
+    "backup": "Backup",
+    "audit": "Audit Trail"
   },
   "profile": {
     "administrator": "Administrateur système"
@@ -44,10 +56,7 @@
   "actions": {
     "newTransaction": "Nouvelle transaction",
     "viewAll": "Voir tout",
-    "review": "Examiner",
-    "save": "Enregistrer",
-    "cancel": "Annuler",
-    "delete": "Supprimer"
+    "review": "Examiner"
   },
   "dashboard": {
     "overview": "APERÇU",

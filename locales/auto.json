@@ -15,7 +15,19 @@
     "people": "People & HR",
     "customers": "Customers",
     "reports": "Reports",
-    "settings": "Settings"
+    "settings": "Settings",
+    "manufacturing": "Manufacturing",
+    "fleet": "Fleet",
+    "projects": "Projects",
+    "financial": "FINANCIAL",
+    "cashBank": "Cash & Banks",
+    "assets": "Assets",
+    "budget": "Budget",
+    "crm": "CRM",
+    "system": "SYSTEM",
+    "documents": "Documents",
+    "backup": "Backup",
+    "audit": "Audit Trail"
   },
   "profile": {
     "administrator": "System administrator"
