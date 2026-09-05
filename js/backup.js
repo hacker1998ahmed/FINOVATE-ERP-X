@@ -83,7 +83,7 @@ const BackupModule = (() => {
           <article class="metric-card">
             <div class="metric-label"><span class="metric-icon orange">📦</span><span data-i18n="backup.storageUsed">Storage Used</span></div>
             <strong>${formatSize(state.storageUsed)} / ${formatSize(state.storageTotal)}</strong>
-            <p>${storagePercent}% ${data-i18n="backup.used"}used</p>
+            <p>${storagePercent}% <span data-i18n="backup.used">used</span></p>
           </article>
           <article class="metric-card">
             <div class="metric-label"><span class="metric-icon violet">⏰</span><span data-i18n="backup.scheduled">Scheduled Backups</span></div>
