@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة العملاء - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-network"></i>
+                    <span>FINOVATE ERP X</span>
+                </div>
+                <button class="toggle-btn" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i><span>لوحة التحكم</span></a></li>
+                    <li class="menu-item has-submenu">
+                        <a href="#"><i class="fas fa-users"></i><span>العملاء والموردين</span><i class="fas fa-chevron-down arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="customers.html" class="active">إدارة العملاء</a></li>
+                            <li><a href="suppliers.html">إدارة الموردين</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#"><i class="fas fa-boxes"></i><span>المخزون والمشتريات</span><i class="fas fa-chevron-down arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="inventory.html">إدارة المخزون</a></li>
+                            <li><a href="purchasing.html">المشتريات</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="sales.html"><i class="fas fa-shopping-cart"></i><span>المبيعات</span></a></li>
+                    <li><a href="accounting.html"><i class="fas fa-calculator"></i><span>المحاسبة</span></a></li>
+                    <li><a href="cash-bank.html"><i class="fas fa-university"></i><span>النقد والبنوك</span></a></li>
+                    <li><a href="assets.html"><i class="fas fa-building"></i><span>الأصول</span></a></li>
+                    <li><a href="people.html"><i class="fas fa-user-tie"></i><span>الموارد البشرية</span></a></li>
+                    <li><a href="crm.html"><i class="fas fa-handshake"></i><span>علاقات العملاء</span></a></li>
+                    <li><a href="budgeting.html"><i class="fas fa-chart-pie"></i><span>الميزانيات</span></a></li>
+                    <li><a href="manufacturing.html"><i class="fas fa-industry"></i><span>التصنيع</span></a></li>
+                    <li><a href="fleet.html"><i class="fas fa-truck"></i><span>الأسطول</span></a></li>
+                    <li><a href="projects.html"><i class="fas fa-project-diagram"></i><span>المشاريع</span></a></li>
+                    <li class="menu-item has-submenu">
+                        <a href="#"><i class="fas fa-file-alt"></i><span>التقارير والمستندات</span><i class="fas fa-chevron-down arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="reports.html">التقارير</a></li>
+                            <li><a href="documents.html">المستندات</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item has-submenu">
+                        <a href="#"><i class="fas fa-cog"></i><span>النظام</span><i class="fas fa-chevron-down arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="backup.html">النسخ الاحتياطي</a></li>
+                            <li><a href="audit.html">التدقيق</a></li>
+                            <li><a href="analytics.html">التحليلات</a></li>
+                            <li><a href="settings.html">الإعدادات</a></li>
+                            <li><a href="ai-settings.html">إعدادات الذكاء الاصطناعي</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-right">
+                    <button class="toggle-btn mobile-toggle" id="mobileToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="search-box">
+                        <input type="text" placeholder="بحث عام...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="header-left">
+                    <button class="icon-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="icon-btn" id="fullscreenBtn">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <div class="notifications">
+                        <button class="icon-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge">3</span>
+                        </button>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-info">
+                            <span class="user-name">أحمد محمد</span>
+                            <span class="user-role">مدير النظام</span>
+                        </div>
+                        <img src="placeholder_user.jpg" alt="User" class="user-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%234f46e5%27%3E%3Ccircle cx=%2712%27 cy=%278%27 r=%274%27/%3E%3Cpath d=%27M12 14c-6 0-8 3-8 6v2h16v-2c0-3-2-6-8-6z%27/%3E%3C/svg%3E'">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <div class="page-header">
+                    <div>
+                        <h1>إدارة العملاء</h1>
+                        <p>إدارة شاملة لقاعدة عملائك وعلاقاتهم التجارية</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-outline"><i class="fas fa-download"></i> تصدير</button>
+                        <button class="btn btn-primary" onclick="openModal('addCustomerModal')">
+                            <i class="fas fa-plus"></i> إضافة عميل جديد
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>1,247</h3>
+                            <p>إجمالي العملاء</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>+89</h3>
+                            <p>عملاء جدد هذا الشهر</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>85%</h3>
+                            <p>نسبة الاحتفاظ</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>2.4M</h3>
+                            <p>إجمالي المبيعات</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters and Search -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>تصفية العملاء</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="filters-row">
+                            <div class="filter-group">
+                                <label>نوع العميل</label>
+                                <select>
+                                    <option value="">الكل</option>
+                                    <option value="individual">فرادى</option>
+                                    <option value="company">شركات</option>
+                                    <option value="vip">VIP</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>الحالة</label>
+                                <select>
+                                    <option value="">الكل</option>
+                                    <option value="active">نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                    <option value="blocked">محظور</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>المنطقة</label>
+                                <select>
+                                    <option value="">الكل</option>
+                                    <option value="riyadh">الرياض</option>
+                                    <option value="jeddah">جدة</option>
+                                    <option value="dammam">الدمام</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>البحث</label>
+                                <input type="text" placeholder="اسم العميل، الهاتف...">
+                            </div>
+                            <button class="btn btn-primary"><i class="fas fa-filter"></i> تطبيق</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>قائمة العملاء</h2>
+                        <div class="table-actions">
+                            <button class="btn btn-sm btn-outline"><i class="fas fa-columns"></i> الأعمدة</button>
+                            <button class="btn btn-sm btn-outline"><i class="fas fa-download"></i> Excel</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox"></th>
+                                        <th>العميل</th>
+                                        <th>نوع العميل</th>
+                                        <th>الهاتف</th>
+                                        <th>البريد الإلكتروني</th>
+                                        <th>المنطقة</th>
+                                        <th>الرصيد</th>
+                                        <th>الحالة</th>
+                                        <th>آخر تفاعل</th>
+                                        <th>إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>
+                                            <div class="user-cell">
+                                                <div class="avatar-circle blue">ش</div>
+                                                <div>
+                                                    <div class="font-medium">شركة التقنية المتقدمة</div>
+                                                    <div class="text-sm text-gray">123456789</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-blue">شركة</span></td>
+                                        <td>+966 55 123 4567</td>
+                                        <td>info@techco.sa</td>
+                                        <td>الرياض</td>
+                                        <td class="font-medium">45,000 ر.س</td>
+                                        <td><span class="badge badge-green">نشط</span></td>
+                                        <td>منذ ساعتين</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon" title="عرض"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>
+                                            <div class="user-cell">
+                                                <div class="avatar-circle green">م</div>
+                                                <div>
+                                                    <div class="font-medium">محمد أحمد علي</div>
+                                                    <div class="text-sm text-gray">987654321</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-purple">فرادى</span></td>
+                                        <td>+966 50 987 6543</td>
+                                        <td>mohammed@email.com</td>
+                                        <td>جدة</td>
+                                        <td class="font-medium">12,500 ر.س</td>
+                                        <td><span class="badge badge-green">نشط</span></td>
+                                        <td>منذ يوم</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon" title="عرض"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>
+                                            <div class="user-cell">
+                                                <div class="avatar-circle orange">م</div>
+                                                <div>
+                                                    <div class="font-medium">مؤسسة النور التجارية</div>
+                                                    <div class="text-sm text-gray">456789123</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-orange">VIP</span></td>
+                                        <td>+966 56 456 7891</td>
+                                        <td>contact@alnoor.sa</td>
+                                        <td>الدمام</td>
+                                        <td class="font-medium">128,000 ر.س</td>
+                                        <td><span class="badge badge-green">نشط</span></td>
+                                        <td>منذ 3 أيام</td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon" title="عرض"><i class="fas fa-eye"></i></button>
+                                                <button class="btn-icon" title="تعديل"><i class="fas fa-edit"></i></button>
+                                                <button class="btn-icon" title="حذف"><i class="fas fa-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination">
+                            <button class="btn btn-sm btn-outline" disabled><i class="fas fa-chevron-right"></i> السابق</button>
+                            <div class="page-numbers">
+                                <button class="btn btn-sm active">1</button>
+                                <button class="btn btn-sm">2</button>
+                                <button class="btn btn-sm">3</button>
+                                <button class="btn btn-sm">...</button>
+                                <button class="btn btn-sm">12</button>
+                            </div>
+                            <button class="btn btn-sm btn-outline">التالي <i class="fas fa-chevron-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Customer Modal -->
+    <div class="modal" id="addCustomerModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h2>إضافة عميل جديد</h2>
+                <button class="close-btn" onclick="closeModal('addCustomerModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addCustomerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>نوع العميل *</label>
+                            <select required>
+                                <option value="">اختر النوع</option>
+                                <option value="individual">فرادى</option>
+                                <option value="company">شركة</option>
+                                <option value="establishment">مؤسسة</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>اسم العميل *</label>
+                            <input type="text" required placeholder="الاسم الكامل">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>رقم الهاتف *</label>
+                            <input type="tel" required placeholder="+966 XX XXX XXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" placeholder="example@email.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>المنطقة *</label>
+                            <select required>
+                                <option value="">اختر المنطقة</option>
+                                <option value="riyadh">الرياض</option>
+                                <option value="jeddah">جدة</option>
+                                <option value="dammam">الدمام</option>
+                                <option value="makkah">مكة المكرمة</option>
+                                <option value="madinah">المدينة المنورة</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>المدينة</label>
+                            <input type="text" placeholder="اسم المدينة">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>العنوان التفصيلي</label>
+                        <textarea rows="3" placeholder="العنوان الكامل"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الرقم الضريبي</label>
+                            <input type="text" placeholder="123456789012345">
+                        </div>
+                        <div class="form-group">
+                            <label>السجل التجاري</label>
+                            <input type="text" placeholder="رقم السجل التجاري">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>ملاحظات</label>
+                        <textarea rows="3" placeholder="أي ملاحظات إضافية"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('addCustomerModal')">إلغاء</button>
+                <button class="btn btn-primary">حفظ العميل</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/customers.js"></script>
+</body>
+</html>
