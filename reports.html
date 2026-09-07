@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التقارير - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>FINOVATE ERP X</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-home"></i><span>لوحة التحكم</span></a>
+                <a href="sales.html"><i class="fas fa-shopping-cart"></i><span>المبيعات</span></a>
+                <a href="purchasing.html"><i class="fas fa-truck-loading"></i><span>المشتريات</span></a>
+                <a href="inventory.html"><i class="fas fa-boxes"></i><span>المخزون</span></a>
+                <a href="manufacturing.html"><i class="fas fa-industry"></i><span>التصنيع</span></a>
+                <a href="crm.html"><i class="fas fa-handshake"></i><span>علاقات العملاء</span></a>
+                <a href="accounting.html"><i class="fas fa-calculator"></i><span>المحاسبة</span></a>
+                <a href="cash-bank.html"><i class="fas fa-university"></i><span>النقد والبنوك</span></a>
+                <a href="assets.html"><i class="fas fa-building"></i><span>الأصول</span></a>
+                <a href="people.html"><i class="fas fa-users"></i><span>الموارد البشرية</span></a>
+                <a href="fleet.html"><i class="fas fa-shipping-fast"></i><span>الأسطول</span></a>
+                <a href="projects.html"><i class="fas fa-project-diagram"></i><span>المشاريع</span></a>
+                <a href="budgeting.html"><i class="fas fa-chart-pie"></i><span>الميزانيات</span></a>
+                <a href="reports.html" class="active"><i class="fas fa-file-alt"></i><span>التقارير</span></a>
+                <a href="analytics.html"><i class="fas fa-chart-line"></i><span>التحليلات</span></a>
+                <a href="documents.html"><i class="fas fa-folder-open"></i><span>المستندات</span></a>
+                <a href="backup.html"><i class="fas fa-database"></i><span>النسخ الاحتياطي</span></a>
+                <a href="audit.html"><i class="fas fa-search-dollar"></i><span>التدقيق</span></a>
+                <a href="ai-settings.html"><i class="fas fa-robot"></i><span>إعدادات الذكاء الاصطناعي</span></a>
+                <a href="settings.html"><i class="fas fa-cog"></i><span>الإعدادات</span></a>
+                <a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i><span>تسجيل الخروج</span></a>
+            </nav>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1><i class="fas fa-file-alt"></i> مركز التقارير</h1>
+                <div class="user-info">
+                    <span>مرحباً، المدير العام</span>
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=4F46E5&color=fff" alt="User">
+                </div>
+            </header>
+
+            <!-- الإحصائيات -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-file-pdf"></i></div>
+                    <div class="stat-details">
+                        <h3>156</h3>
+                        <p>تقرير متاح</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-clock"></i></div>
+                    <div class="stat-details">
+                        <h3>12</h3>
+                        <p>تقارير مجدولة</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-download"></i></div>
+                    <div class="stat-details">
+                        <h3>48</h3>
+                        <p>تنزيل هذا الأسبوع</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-envelope"></i></div>
+                    <div class="stat-details">
+                        <h3>25</h3>
+                        <p>تقرير مرسل بالبريد</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- التبويبات -->
+            <section class="tabs-section">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="financial">التقارير المالية</button>
+                    <button class="tab-btn" data-tab="sales">تقارير المبيعات</button>
+                    <button class="tab-btn" data-tab="inventory">تقارير المخزون</button>
+                    <button class="tab-btn" data-tab="hr">تقارير الموارد البشرية</button>
+                    <button class="tab-btn" data-tab="scheduled">التقارير المجدولة</button>
+                </div>
+
+                <div class="tabs-content">
+                    <!-- التقارير المالية -->
+                    <div class="tab-pane active" id="financial">
+                        <div class="table-header">
+                            <h2>التقارير المالية</h2>
+                            <button class="btn-primary"><i class="fas fa-plus"></i> تقرير مخصص</button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم التقرير</th>
+                                    <th>الوصف</th>
+                                    <th>آخر تحديث</th>
+                                    <th>التنسيقات المتاحة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ميزانية العمومية</td>
+                                    <td>تقرير شامل للأصول والخصوم</td>
+                                    <td>2024-01-20</td>
+                                    <td>PDF, Excel</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-envelope"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>قائمة الدخل</td>
+                                    <td>الإيرادات والمصروفات الشهرية</td>
+                                    <td>2024-01-20</td>
+                                    <td>PDF, Excel</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-envelope"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تدفق النقدية</td>
+                                    <td>حركة النقد الداخلة والخارجة</td>
+                                    <td>2024-01-19</td>
+                                    <td>PDF, Excel</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-envelope"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- تقارير المبيعات -->
+                    <div class="tab-pane" id="sales">
+                        <div class="table-header">
+                            <h2>تقارير المبيعات</h2>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم التقرير</th>
+                                    <th>الفترة</th>
+                                    <th>آخر تحديث</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>تحليل المبيعات الشهري</td>
+                                    <td>يناير 2024</td>
+                                    <td>2024-01-20</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>أفضل المنتجات مبيعاً</td>
+                                    <td>2024</td>
+                                    <td>2024-01-20</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- تقارير المخزون -->
+                    <div class="tab-pane" id="inventory">
+                        <div class="table-header">
+                            <h2>تقارير المخزون</h2>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم التقرير</th>
+                                    <th>الوصف</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>حركة المخزون</td>
+                                    <td>دخول وخروج الأصناف</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تقييم المخزون</td>
+                                    <td>قيمة المخزون الحالي</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- تقارير الموارد البشرية -->
+                    <div class="tab-pane" id="hr">
+                        <div class="table-header">
+                            <h2>تقارير الموارد البشرية</h2>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم التقرير</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>كشف الرواتب</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تقرير الحضور والانصراف</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- التقارير المجدولة -->
+                    <div class="tab-pane" id="scheduled">
+                        <div class="table-header">
+                            <h2>التقارير المجدولة</h2>
+                            <button class="btn-primary"><i class="fas fa-plus"></i> جدولة تقرير</button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>التقرير</th>
+                                    <th>التكرار</th>
+                                    <th>آخر إرسال</th>
+                                    <th>المستلمون</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ميزانية العمومية</td>
+                                    <td>شهري</td>
+                                    <td>2024-01-01</td>
+                                    <td>admin@company.com</td>
+                                    <td><span class="status-badge status-active">نشط</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

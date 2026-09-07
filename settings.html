@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="settings.title">الإعدادات | FINOVATE ERP X</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/ai-settings.css">
+    <style>
+        .settings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; margin-top: 24px; }
+        .settings-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .settings-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #eee; }
+        .settings-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .settings-icon.blue { background: #e8f4fd; color: #1976d2; }
+        .settings-icon.green { background: #e8f5e9; color: #388e3c; }
+        .settings-icon.orange { background: #fff3e0; color: #f57c00; }
+        .settings-icon.purple { background: #f3e5f5; color: #7b1fa2; }
+        .settings-icon.red { background: #ffebee; color: #d32f2f; }
+        .settings-icon.teal { background: #e0f2f1; color: #00796b; }
+        .setting-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #f5f5f5; }
+        .setting-item:last-child { border-bottom: none; }
+        .setting-label { display: flex; flex-direction: column; gap: 4px; }
+        .setting-label b { color: #1a1a1a; }
+        .setting-label small { color: #888; font-size: 12px; }
+        .toggle-switch { position: relative; width: 52px; height: 28px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; border-radius: 28px; }
+        .toggle-slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        input:checked + .toggle-slider { background-color: #1976d2; }
+        input:checked + .toggle-slider:before { transform: translateX(24px); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #555; font-weight: 500; }
+        .form-control { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; transition: all 0.3s; }
+        .form-control:focus { outline: none; border-color: #1976d2; box-shadow: 0 0 0 3px rgba(25,118,210,0.1); }
+        select.form-control { cursor: pointer; }
+        .btn-save { background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%); color: white; border: none; padding: 14px 32px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; }
+        .btn-save:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(25,118,210,0.3); }
+        .color-picker { display: flex; gap: 8px; margin-top: 8px; }
+        .color-option { width: 36px; height: 36px; border-radius: 8px; cursor: pointer; border: 3px solid transparent; transition: all 0.3s; }
+        .color-option.active { border-color: #1a1a1a; transform: scale(1.1); }
+        .notification-preview { background: #f5f5f5; padding: 16px; border-radius: 8px; margin-top: 12px; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 2px solid #eee; padding-bottom: 0; overflow-x: auto; }
+        .tab-btn { padding: 12px 24px; background: none; border: none; cursor: pointer; color: #666; font-weight: 500; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s; white-space: nowrap; }
+        .tab-btn:hover { color: #1976d2; }
+        .tab-btn.active { color: #1976d2; border-bottom-color: #1976d2; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .api-key-box { background: #f8f9fa; padding: 16px; border-radius: 8px; font-family: monospace; word-break: break-all; border: 1px dashed #ddd; }
+        .two-factor-info { background: #fff3cd; padding: 16px; border-radius: 8px; margin-top: 16px; border-right: 4px solid #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a class="brand" href="index.html" aria-label="FINOVATE home">
+                    <span class="brand-logo">⬡</span>
+                    <span class="brand-name">FINOVATE</span>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><span>▦</span><span data-i18n="navigation.dashboard">Dashboard</span></a>
+                <a href="analytics.html"><span>◔</span><span data-i18n="navigation.analytics">Analytics</span></a>
+                <a href="sales.html"><span>↗</span><span data-i18n="navigation.sales">Sales</span><em>12</em></a>
+                <a href="purchasing.html"><span>▣</span><span data-i18n="navigation.purchasing">Purchasing</span></a>
+                <a href="inventory.html"><span>▤</span><span data-i18n="navigation.inventory">Inventory</span></a>
+                <a href="manufacturing.html"><span>⚙</span><span data-i18n="navigation.manufacturing">Manufacturing</span></a>
+                <a href="fleet.html"><span>🚚</span><span data-i18n="navigation.fleet">Fleet</span></a>
+                <a href="projects.html"><span>📋</span><span data-i18n="navigation.projects">Projects</span></a>
+                <a href="accounting.html"><span>▤</span><span data-i18n="navigation.accounting">Accounting</span></a>
+                <a href="cash-bank.html"><span>💰</span><span data-i18n="navigation.cashBank">Cash & Banks</span></a>
+                <a href="assets.html"><span>🏢</span><span data-i18n="navigation.assets">Assets</span></a>
+                <a href="budgeting.html"><span>📊</span><span data-i18n="navigation.budget">Budget</span></a>
+                <a href="people.html"><span>♙</span><span data-i18n="navigation.people">People & HR</span></a>
+                <a href="customers.html"><span>♧</span><span data-i18n="navigation.customers">Customers</span></a>
+                <a href="crm.html"><span>🤝</span><span data-i18n="navigation.crm">CRM</span></a>
+                <a href="reports.html"><span>▥</span><span data-i18n="navigation.reports">Reports</span></a>
+                <a href="documents.html"><span>📁</span><span data-i18n="navigation.documents">Documents</span></a>
+                <a href="backup.html"><span>💾</span><span data-i18n="navigation.backup">Backup</span></a>
+                <a href="audit.html"><span>🔍</span><span data-i18n="navigation.audit">Audit Trail</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="settings.html" class="active"><span>⚙</span><span data-i18n="navigation.settings">Settings</span></a>
+                <div class="profile">
+                    <span class="profile-avatar">AM</span>
+                    <span><b>Ahmed Mostafa</b><small data-i18n="profile.administrator">System administrator</small></span>
+                    <button aria-label="Profile options">⋮</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-start">
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+                    <h1 class="page-title" data-i18n="settings.title">إعدادات النظام</h1>
+                </div>
+                <div class="topbar-end">
+                    <button class="icon-btn" id="notificationsBtn" aria-label="Notifications">
+                        <span>🔔</span>
+                        <span class="badge">3</span>
+                    </button>
+                    <button class="icon-btn" id="helpBtn" aria-label="Help">❓</button>
+                    <button class="btn-primary" onclick="saveAllSettings()">
+                        <span>💾</span>
+                        <span data-i18n="actions.saveAll">حفظ الكل</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- تبويبات الإعدادات -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="general"><span data-i18n="settings.general">عام</span></button>
+                    <button class="tab-btn" data-tab="company"><span data-i18n="settings.company">الشركة</span></button>
+                    <button class="tab-btn" data-tab="localization"><span data-i18n="settings.localization">اللغة والمنطقة</span></button>
+                    <button class="tab-btn" data-tab="security"><span data-i18n="settings.security">الأمان</span></button>
+                    <button class="tab-btn" data-tab="notifications"><span data-i18n="settings.notifications">الإشعارات</span></button>
+                    <button class="tab-btn" data-tab="integration"><span data-i18n="settings.integration">التكامل</span></button>
+                    <button class="tab-btn" data-tab="backup"><span data-i18n="settings.backupRestore">نسخ احتياطي</span></button>
+                </div>
+
+                <!-- محتوى التبويبات -->
+                <div class="tab-content active" id="general-tab">
+                    <div class="settings-grid">
+                        <!-- المظهر -->
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon blue">🎨</div>
+                                <div>
+                                    <h3 data-i18n="settings.appearance">المظهر</h3>
+                                    <small data-i18n="settings.appearanceDesc">تخصيص مظهر النظام</small>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.theme">الوضع الليلي</b>
+                                    <small data-i18n="settings.themeDesc">تبديل بين الوضع الفاتح والداكن</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="darkModeToggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.primaryColor">اللون الأساسي</b>
+                                    <small data-i18n="settings.colorDesc">اختر لون العلامة التجارية</small>
+                                </div>
+                                <div class="color-picker">
+                                    <div class="color-option active" style="background: #1976d2;" data-color="#1976d2"></div>
+                                    <div class="color-option" style="background: #388e3c;" data-color="#388e3c"></div>
+                                    <div class="color-option" style="background: #7b1fa2;" data-color="#7b1fa2"></div>
+                                    <div class="color-option" style="background: #f57c00;" data-color="#f57c00"></div>
+                                    <div class="color-option" style="background: #d32f2f;" data-color="#d32f2f"></div>
+                                    <div class="color-option" style="background: #00796b;" data-color="#00796b"></div>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.compactMode">الوضع المضغوط</b>
+                                    <small data-i18n="settings.compactDesc">تقليل المسافات لعرض أكثر</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="compactModeToggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- اللغة والعملة -->
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon green">🌐</div>
+                                <div>
+                                    <h3 data-i18n="settings.languageRegion">اللغة والمنطقة</h3>
+                                    <small data-i18n="settings.languageRegionDesc">إعدادات اللغة والتنسيق</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.language">لغة العرض</label>
+                                <select class="form-control" id="languageSelect">
+                                    <option value="ar" selected>العربية</option>
+                                    <option value="en">English</option>
+                                    <option value="fr">Français</option>
+                                    <option value="es">Español</option>
+                                    <option value="de">Deutsch</option>
+                                    <option value="it">Italiano</option>
+                                    <option value="pt">Português</option>
+                                    <option value="ru">Русский</option>
+                                    <option value="zh-CN">中文</option>
+                                    <option value="ja">日本語</option>
+                                    <option value="ko">한국어</option>
+                                    <option value="tr">Türkçe</option>
+                                    <option value="fa">فارسی</option>
+                                    <option value="ur">اردو</option>
+                                    <option value="hi">हिन्दी</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.currency">العملة الافتراضية</label>
+                                <select class="form-control" id="currencySelect">
+                                    <option value="EGP" selected>جنيه مصري (EGP)</option>
+                                    <option value="USD">دولار أمريكي (USD)</option>
+                                    <option value="EUR">يورو (EUR)</option>
+                                    <option value="GBP">جنيه إسترليني (GBP)</option>
+                                    <option value="SAR">ريال سعودي (SAR)</option>
+                                    <option value="AED">درهم إماراتي (AED)</option>
+                                    <option value="KWD">دينار كويتي (KWD)</option>
+                                    <option value="QAR">ريال قطري (QAR)</option>
+                                    <option value="JOD">دينار أردني (JOD)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.dateFormat">تنسيق التاريخ</label>
+                                <select class="form-control" id="dateFormatSelect">
+                                    <option value="DD/MM/YYYY" selected>يوم/شهر/سنة (31/12/2025)</option>
+                                    <option value="MM/DD/YYYY">شهر/يوم/سنة (12/31/2025)</option>
+                                    <option value="YYYY-MM-DD">سنة-شهر-يوم (2025-12-31)</option>
+                                    <option value="DD-MM-YYYY">يوم-شهر-سنة (31-12-2025)</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.rtl">اتجاه النص</b>
+                                    <small data-i18n="settings.rtlDesc">من اليمين لليسار أو العكس</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="rtlToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- النظام -->
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon orange">⚙</div>
+                                <div>
+                                    <h3 data-i18n="settings.system">إعدادات النظام</h3>
+                                    <small data-i18n="settings.systemDesc">تحكم في سلوك النظام</small>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.autoSave">الحفظ التلقائي</b>
+                                    <small data-i18n="settings.autoSaveDesc">حفظ التغييرات تلقائياً</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="autoSaveToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.autoRefresh">التحديث التلقائي</b>
+                                    <small data-i18n="settings.autoRefreshDesc">تحديث البيانات كل دقيقة</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="autoRefreshToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.confirmation">تأكيد الحذف</b>
+                                    <small data-i18n="settings.confirmationDesc">طلب تأكيد قبل الحذف</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="confirmDeleteToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.cache">استخدام الذاكرة المؤقتة</b>
+                                    <small data-i18n="settings.cacheDesc">تحسين الأداء بالتخزين المؤقت</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="cacheToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="form-group" style="margin-top: 20px;">
+                                <label data-i18n="settings.sessionTimeout">مهلة الجلسة (دقائق)</label>
+                                <input type="number" class="form-control" id="sessionTimeout" value="30" min="5" max="480">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويب الشركة -->
+                <div class="tab-content" id="company-tab">
+                    <div class="settings-grid">
+                        <div class="settings-card" style="grid-column: span 2;">
+                            <div class="settings-header">
+                                <div class="settings-icon purple">🏢</div>
+                                <div>
+                                    <h3 data-i18n="settings.companyInfo">معلومات الشركة</h3>
+                                    <small data-i18n="settings.companyInfoDesc">البيانات الأساسية للشركة</small>
+                                </div>
+                            </div>
+                            <div class="settings-grid" style="grid-template-columns: 1fr 1fr; margin-top: 0;">
+                                <div class="form-group">
+                                    <label data-i18n="settings.companyName">اسم الشركة</label>
+                                    <input type="text" class="form-control" id="companyName" value="FINOVATE – AHMED EG">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="settings.tradingName">الاسم التجاري</label>
+                                    <input type="text" class="form-control" id="tradingName" value="FINOVATE ERP">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.address">العنوان</label>
+                                <input type="text" class="form-control" id="companyAddress" value="القاهرة، مصر">
+                            </div>
+                            <div class="settings-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 0;">
+                                <div class="form-group">
+                                    <label data-i18n="settings.phone">الهاتف</label>
+                                    <input type="tel" class="form-control" id="companyPhone" value="+20 123 456 7890">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="settings.email">البريد الإلكتروني</label>
+                                    <input type="email" class="form-control" id="companyEmail" value="info@finovate.com">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="settings.website">الموقع الإلكتروني</label>
+                                    <input type="url" class="form-control" id="companyWebsite" value="www.finovate.com">
+                                </div>
+                            </div>
+                            <div class="settings-grid" style="grid-template-columns: 1fr 1fr; margin-top: 0;">
+                                <div class="form-group">
+                                    <label data-i18n="settings.taxNumber">الرقم الضريبي</label>
+                                    <input type="text" class="form-control" id="taxNumber" value="123-456-789">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="settings.commercialReg">السجل التجاري</label>
+                                    <input type="text" class="form-control" id="commercialReg" value="98765">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.logo">شعار الشركة</label>
+                                <div style="display: flex; gap: 16px; align-items: center;">
+                                    <div style="width: 80px; height: 80px; background: #f5f5f5; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 32px;">⬡</div>
+                                    <button class="btn-primary" style="padding: 10px 20px;">
+                                        <span>📁</span>
+                                        <span data-i18n="actions.upload">رفع شعار</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- الفروع -->
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon teal">📍</div>
+                                <div>
+                                    <h3 data-i18n="settings.branches">الفروع</h3>
+                                    <small data-i18n="settings.branchesDesc">إدارة فروع الشركة</small>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 16px;">
+                                <button class="btn-primary" onclick="openBranchModal()" style="width: 100%;">
+                                    <span>➕</span>
+                                    <span data-i18n="actions.addBranch">إضافة فرع</span>
+                                </button>
+                            </div>
+                            <div id="branchesList">
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <b>الفرع الرئيسي</b>
+                                        <small>القاهرة، مصر</small>
+                                    </div>
+                                    <span style="background: #e8f5e9; color: #388e3c; padding: 4px 12px; border-radius: 12px; font-size: 12px;" data-i18n="status.active">نشط</span>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <b>فرع الإسكندرية</b>
+                                        <small>الإسكندرية، مصر</small>
+                                    </div>
+                                    <span style="background: #e8f5e9; color: #388e3c; padding: 4px 12px; border-radius: 12px; font-size: 12px;" data-i18n="status.active">نشط</span>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">
+                                        <b>فرع دبي</b>
+                                        <small>دبي، الإمارات</small>
+                                    </div>
+                                    <span style="background: #fff3e0; color: #f57c00; padding: 4px 12px; border-radius: 12px; font-size: 12px;" data-i18n="status.pending">قيد الإنشاء</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويب الأمان -->
+                <div class="tab-content" id="security-tab">
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon red">🔐</div>
+                                <div>
+                                    <h3 data-i18n="settings.password">كلمة المرور</h3>
+                                    <small data-i18n="settings.passwordDesc">تغيير كلمة المرور</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.currentPassword">كلمة المرور الحالية</label>
+                                <input type="password" class="form-control" id="currentPassword">
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.newPassword">كلمة المرور الجديدة</label>
+                                <input type="password" class="form-control" id="newPassword">
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.confirmPassword">تأكيد كلمة المرور</label>
+                                <input type="password" class="form-control" id="confirmPassword">
+                            </div>
+                            <button class="btn-save" onclick="changePassword()">
+                                <span>🔑</span>
+                                <span data-i18n="actions.changePassword">تغيير كلمة المرور</span>
+                            </button>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon purple">🛡</div>
+                                <div>
+                                    <h3 data-i18n="settings.twoFactor">المصادقة الثنائية</h3>
+                                    <small data-i18n="settings.twoFactorDesc">حماية إضافية لحسابك</small>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.enable2FA">تفعيل 2FA</b>
+                                    <small data-i18n="settings.enable2FADesc">استخدم تطبيق المصادقة</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="twoFactorToggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="two-factor-info" id="twoFactorInfo" style="display: none;">
+                                <b data-i18n="settings.scanQR">امسح رمز QR</b>
+                                <p style="margin: 12px 0; font-size: 13px;" data-i18n="settings.scanQRDesc">افتح تطبيق Google Authenticator وامسح الرمز</p>
+                                <div style="width: 150px; height: 150px; background: white; margin: 16px auto; display: flex; align-items: center; justify-content: center; border: 2px dashed #ddd;">
+                                    <span style="font-size: 48px;">📱</span>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="settings.backupCodes">رموز النسخ الاحتياطي</label>
+                                    <div class="api-key-box" style="font-size: 12px; line-height: 1.8;">
+                                        XXXXXX-XXXXXX<br>
+                                        XXXXXX-XXXXXX<br>
+                                        XXXXXX-XXXXXX
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon blue">👥</div>
+                                <div>
+                                    <h3 data-i18n="settings.sessions">الجلسات النشطة</h3>
+                                    <small data-i18n="settings.sessionsDesc">أجهزة متصلة بحسابك</small>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b>Chrome - Windows</b>
+                                    <small>القاهرة، مصر · الجهاز الحالي</small>
+                                </div>
+                                <span style="background: #e8f4fd; color: #1976d2; padding: 4px 12px; border-radius: 12px; font-size: 12px;">نشط الآن</span>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b>Safari - iPhone</b>
+                                    <small>القاهرة، مصر · منذ ساعة</small>
+                                </div>
+                                <button class="btn-danger" style="background: #ffebee; color: #d32f2f; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer;" data-i18n="actions.logout">تسجيل خروج</button>
+                            </div>
+                            <button class="btn-primary" style="width: 100%; margin-top: 16px; background: #f5f5f5; color: #333;" onclick="logoutAllSessions()">
+                                <span>🚪</span>
+                                <span data-i18n="actions.logoutAll">تسجيل خروج من جميع الأجهزة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويب الإشعارات -->
+                <div class="tab-content" id="notifications-tab">
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon orange">🔔</div>
+                                <div>
+                                    <h3 data-i18n="settings.notificationPrefs">تفضيلات الإشعارات</h3>
+                                    <small data-i18n="settings.notificationPrefsDesc">اختر ما تريد تلقيه</small>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.emailNotif">إشعارات البريد الإلكتروني</b>
+                                    <small data-i18n="settings.emailNotifDesc">استلام تحديثات عبر البريد</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailNotifToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.browserNotif">إشعارات المتصفح</b>
+                                    <small data-i18n="settings.browserNotifDesc">إشعارات منبثقة في المتصفح</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="browserNotifToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.smsNotif">إشعارات SMS</b>
+                                    <small data-i18n="settings.smsNotifDesc">رسائل نصية للتنبيهات الهامة</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="smsNotifToggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;">
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.salesAlerts">تنبيهات المبيعات</b>
+                                    <small data-i18n="settings.salesAlertsDesc">طلبات جديدة، مدفوعات متأخرة</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="salesAlertsToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.inventoryAlerts">تنبيهات المخزون</b>
+                                    <small data-i18n="settings.inventoryAlertsDesc">منتجات منخفضة، نفاذ المخزون</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="inventoryAlertsToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.accountingAlerts">تنبيهات المحاسبة</b>
+                                    <small data-i18n="settings.accountingAlertsDesc">فواتير مستحقة، تقارير مالية</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="accountingAlertsToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon green">📱</div>
+                                <div>
+                                    <h3 data-i18n="settings.preview">معاينة الإشعار</h3>
+                                    <small data-i18n="settings.previewDesc">كيف ستظهر الإشعارات</small>
+                                </div>
+                            </div>
+                            <div class="notification-preview">
+                                <div style="display: flex; gap: 12px; align-items: start;">
+                                    <span style="font-size: 24px;">🔔</span>
+                                    <div>
+                                        <b data-i18n="notif.sampleTitle">دفعة جديدة received</b>
+                                        <p style="margin: 4px 0 0; color: #666; font-size: 13px;" data-i18n="notif.sampleDesc">تم استلام دفعة بقيمة $4,200 من Nile Trading Co.</p>
+                                        <small style="color: #999; font-size: 11px;">منذ 5 دقائق</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" style="width: 100%; margin-top: 16px;" onclick="sendTestNotification()">
+                                <span>🧪</span>
+                                <span data-i18n="actions.sendTest">إرسال إشعار تجريبي</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويب التكامل -->
+                <div class="tab-content" id="integration-tab">
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon blue">🔌</div>
+                                <div>
+                                    <h3 data-i18n="settings.apiKeys">مفاتيح API</h3>
+                                    <small data-i18n="settings.apiKeysDesc">للربط مع تطبيقات خارجية</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.apiKey">مفتاح API الرئيسي</label>
+                                <div class="api-key-box">
+                                    sk_live_51ABC123XYZ789DEF456GHI
+                                </div>
+                                <button class="btn-primary" style="margin-top: 8px; padding: 8px 16px; font-size: 13px;" onclick="regenerateApiKey()">
+                                    <span>🔄</span>
+                                    <span data-i18n="actions.regenerate">إعادة توليد</span>
+                                </button>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.webhookUrl">رابط Webhook</label>
+                                <input type="url" class="form-control" id="webhookUrl" value="https://finovate.com/webhooks/events">
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.enableWebhooks">تفعيل Webhooks</b>
+                                    <small data-i18n="settings.enableWebhooksDesc">إرسال أحداث النظام</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="webhooksToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon green">📊</div>
+                                <div>
+                                    <h3 data-i18n="settings.googleIntegration">تكامل Google</h3>
+                                    <small data-i18n="settings.googleIntegrationDesc">خدمات Google Cloud</small>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.sheetsSync">مزامنة Google Sheets</b>
+                                    <small data-i18n="settings.sheetsSyncDesc">قاعدة البيانات السحابية</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="sheetsSyncToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.driveSync">مزامنة Google Drive</b>
+                                    <small data-i18n="settings.driveSyncDesc">تخزين المستندات</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="driveSyncToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.gmailIntegration">تكامل Gmail</b>
+                                    <small data-i18n="settings.gmailIntegrationDesc">إرسال الفواتير عبر البريد</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="gmailToggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <button class="btn-primary" style="width: 100%; margin-top: 16px;" onclick="connectGoogle()">
+                                <span>🔗</span>
+                                <span data-i18n="actions.connectGoogle">ربط حساب Google</span>
+                            </button>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon purple">🤖</div>
+                                <div>
+                                    <h3 data-i18n="settings.aiIntegration">تكامل الذكاء الاصطناعي</h3>
+                                    <small data-i18n="settings.aiIntegrationDesc">خدمات AI الخارجية</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.openaiKey">مفتاح OpenAI API</label>
+                                <input type="password" class="form-control" id="openaiKey" value="sk-••••••••••••••••••••••••">
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.anthropicKey">مفتاح Anthropic API</label>
+                                <input type="password" class="form-control" id="anthropicKey" placeholder="أدخل المفتاح">
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.enableAiFeatures">تفعيل ميزات AI</b>
+                                    <small data-i18n="settings.enableAiFeaturesDesc">التحليل والتنبؤ الذكي</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="aiFeaturesToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <a href="ai-settings.html" class="btn-primary" style="display: block; text-align: center; margin-top: 16px; text-decoration: none;">
+                                <span>⚙</span>
+                                <span data-i18n="actions.aiSettings">إعدادات AI المتقدمة</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويب النسخ الاحتياطي -->
+                <div class="tab-content" id="backup-tab">
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon blue">💾</div>
+                                <div>
+                                    <h3 data-i18n="settings.backupNow">نسخ احتياطي فوري</h3>
+                                    <small data-i18n="settings.backupNowDesc">احفظ نسخة من بياناتك الآن</small>
+                                </div>
+                            </div>
+                            <p style="color: #666; margin-bottom: 20px;" data-i18n="settings.backupDesc">سيتم إنشاء نسخة كاملة من جميع بيانات النظام بما في ذلك العملاء، الموردين، المنتجات، المعاملات المالية، والإعدادات.</p>
+                            <button class="btn-save" style="width: 100%;" onclick="createBackup()">
+                                <span>💾</span>
+                                <span data-i18n="actions.createBackup">إنشاء نسخة احتياطية</span>
+                            </button>
+                            <div style="margin-top: 20px; padding: 16px; background: #f5f5f5; border-radius: 8px;">
+                                <b data-i18n="settings.lastBackup">آخر نسخة احتياطية:</b>
+                                <p style="margin: 8px 0 0; color: #666;" id="lastBackupDate">اليوم، 10:30 صباحاً</p>
+                                <small style="color: #999;" data-i18n="settings.backupSize">الحجم: 24.5 MB</small>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon green">🔄</div>
+                                <div>
+                                    <h3 data-i18n="settings.autoBackup">النسخ التلقائي</h3>
+                                    <small data-i18n="settings.autoBackupDesc">جدولة النسخ الاحتياطي</small>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.enableAutoBackup">تفعيل النسخ التلقائي</b>
+                                    <small data-i18n="settings.enableAutoBackupDesc">نسخ احتياطي يومي تلقائي</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="autoBackupToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="form-group" style="margin-top: 16px;">
+                                <label data-i18n="settings.backupFrequency">التكرار</label>
+                                <select class="form-control" id="backupFrequency">
+                                    <option value="daily" selected data-i18n="options.daily">يومياً</option>
+                                    <option value="weekly" data-i18n="options.weekly">أسبوعياً</option>
+                                    <option value="monthly" data-i18n="options.monthly">شهرياً</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="settings.backupTime">وقت النسخ</label>
+                                <input type="time" class="form-control" id="backupTime" value="02:00">
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <b data-i18n="settings.cloudBackup">النسخ السحابي</b>
+                                    <small data-i18n="settings.cloudBackupDesc">رفع إلى Google Drive</small>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="cloudBackupToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon orange">📥</div>
+                                <div>
+                                    <h3 data-i18n="settings.restore">استعادة البيانات</h3>
+                                    <small data-i18n="settings.restoreDesc">استرجاع نسخة احتياطية سابقة</small>
+                                </div>
+                            </div>
+                            <div style="border: 2px dashed #ddd; padding: 32px; text-align: center; border-radius: 8px; margin-bottom: 16px;">
+                                <span style="font-size: 48px;">📁</span>
+                                <p style="margin: 16px 0; color: #666;" data-i18n="settings.dragDrop">اسحب وأفلت ملف النسخة هنا</p>
+                                <small style="color: #999;" data-i18n="settings.orBrowse">أو</small>
+                                <button class="btn-primary" style="margin-top: 12px;" onclick="document.getElementById('restoreFile').click()">
+                                    <span>📂</span>
+                                    <span data-i18n="actions.browse">تصفح الملفات</span>
+                                </button>
+                                <input type="file" id="restoreFile" style="display: none;" accept=".json,.zip">
+                            </div>
+                            <div style="padding: 12px; background: #fff3cd; border-radius: 8px; border-right: 4px solid #ffc107;">
+                                <b style="color: #856404;" data-i18n="warning.title">⚠ تحذير</b>
+                                <p style="margin: 8px 0 0; color: #856404; font-size: 13px;" data-i18n="settings.restoreWarning">استعادة نسخة احتياطية ستستبدل جميع البيانات الحالية. تأكد من إنشاء نسخة احتياطية أولاً.</p>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-header">
+                                <div class="settings-icon red">🗑</div>
+                                <div>
+                                    <h3 data-i18n="settings.dataManagement">إدارة البيانات</h3>
+                                    <small data-i18n="settings.dataManagementDesc">عمليات على البيانات</small>
+                                </div>
+                            </div>
+                            <button class="btn-primary" style="width: 100%; margin-bottom: 12px; background: #f5f5f5; color: #333;" onclick="exportData()">
+                                <span>📤</span>
+                                <span data-i18n="actions.exportData">تصدير جميع البيانات</span>
+                            </button>
+                            <button class="btn-primary" style="width: 100%; margin-bottom: 12px; background: #f5f5f5; color: #333;" onclick="clearCache()">
+                                <span>🧹</span>
+                                <span data-i18n="actions.clearCache">مسح الذاكرة المؤقتة</span>
+                            </button>
+                            <button class="btn-primary" style="width: 100%; margin-bottom: 12px; background: #f5f5f5; color: #333;" onclick="resetSettings()">
+                                <span>🔄</span>
+                                <span data-i18n="actions.resetSettings">إعادة تعيين الإعدادات</span>
+                            </button>
+                            <button class="btn-danger" style="width: 100%; background: #ffebee; color: #d32f2f; border: none; padding: 14px 24px; border-radius: 8px; cursor: pointer; font-weight: 600;" onclick="confirmDeleteAll()">
+                                <span>🗑</span>
+                                <span data-i18n="actions.deleteAll">حذف جميع البيانات</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/localization.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // إدارة التبويبات
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.dataset.tab;
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(tabId + '-tab').classList.add('active');
+            });
+        });
+
+        // اختيار الألوان
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+                const color = option.dataset.color;
+                document.documentElement.style.setProperty('--primary-color', color);
+            });
+        });
+
+        // حفظ جميع الإعدادات
+        function saveAllSettings() {
+            const settings = {
+                darkMode: document.getElementById('darkModeToggle').checked,
+                compactMode: document.getElementById('compactModeToggle').checked,
+                language: document.getElementById('languageSelect').value,
+                currency: document.getElementById('currencySelect').value,
+                dateFormat: document.getElementById('dateFormatSelect').value,
+                rtl: document.getElementById('rtlToggle').checked,
+                autoSave: document.getElementById('autoSaveToggle').checked,
+                autoRefresh: document.getElementById('autoRefreshToggle').checked,
+                confirmDelete: document.getElementById('confirmDeleteToggle').checked,
+                cache: document.getElementById('cacheToggle').checked,
+                sessionTimeout: parseInt(document.getElementById('sessionTimeout').value),
+                companyName: document.getElementById('companyName').value,
+                emailNotif: document.getElementById('emailNotifToggle').checked,
+                browserNotif: document.getElementById('browserNotifToggle').checked,
+                autoBackup: document.getElementById('autoBackupToggle').checked
+            };
+            
+            localStorage.setItem('finovate_settings', JSON.stringify(settings));
+            
+            // عرض رسالة نجاح
+            const notification = document.createElement('div');
+            notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4caf50; color: white; padding: 16px 32px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 10000; animation: slideDown 0.3s ease;';
+            notification.innerHTML = '✅ <span data-i18n="messages.settingsSaved">تم حفظ الإعدادات بنجاح</span>';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideUp 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        // تغيير كلمة المرور
+        function changePassword() {
+            const current = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            
+            if (!current || !newPass || !confirm) {
+                alert('الرجاء ملء جميع الحقول');
+                return;
+            }
+            
+            if (newPass !== confirm) {
+                alert('كلمات المرور غير متطابقة');
+                return;
+            }
+            
+            if (newPass.length < 8) {
+                alert('كلمة المرور يجب أن تكون 8 أحرف على الأقل');
+                return;
+            }
+            
+            alert('✅ تم تغيير كلمة المرور بنجاح');
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        // تفعيل 2FA
+        document.getElementById('twoFactorToggle').addEventListener('change', function() {
+            document.getElementById('twoFactorInfo').style.display = this.checked ? 'block' : 'none';
+        });
+
+        // إنشاء نسخة احتياطية
+        function createBackup() {
+            const btn = event.target.closest('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ جاري الإنشاء...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                alert('✅ تم إنشاء النسخة الاحتياطية بنجاح\n📁 Backup_2025_01_15_1030.zip (24.5 MB)');
+                document.getElementById('lastBackupDate').textContent = 'الآن';
+            }, 2000);
+        }
+
+        // تصدير البيانات
+        function exportData() {
+            alert('📤 جاري تحضير ملف التصدير...\nسيتم تنزيل Finovate_Data_Export.json خلال لحظات');
+        }
+
+        // مسح الذاكرة المؤقتة
+        function clearCache() {
+            if (confirm('هل أنت متأكد من مسح الذاكرة المؤقتة؟')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                alert('✅ تم مسح الذاكرة المؤقتة بنجاح');
+                location.reload();
+            }
+        }
+
+        // إعادة تعيين الإعدادات
+        function resetSettings() {
+            if (confirm('هل أنت متأكد من إعادة تعيين جميع الإعدادات للقيم الافتراضية؟')) {
+                localStorage.removeItem('finovate_settings');
+                location.reload();
+            }
+        }
+
+        // تأكيد حذف جميع البيانات
+        function confirmDeleteAll() {
+            if (confirm('⚠ تحذير شديد!\n\nهل أنت متأكد تماماً من حذف جميع البيانات؟\nهذا الإجراء لا يمكن التراجع عنه.')) {
+                if (confirm('⚠ تحذير أخير!\n\nاكتب "DELETE" للتأكيد:')) {
+                    alert('🗑 جاري حذف جميع البيانات...');
+                }
+            }
+        }
+
+        // تسجيل خروج من جميع الجلسات
+        function logoutAllSessions() {
+            if (confirm('هل تريد تسجيل الخروج من جميع الأجهزة؟')) {
+                alert('✅ تم تسجيل الخروج من جميع الأجهزة');
+            }
+        }
+
+        // إرسال إشعار تجريبي
+        function sendTestNotification() {
+            alert('🔔 تم إرسال إشعار تجريبي');
+        }
+
+        // إعادة توليد مفتاح API
+        function regenerateApiKey() {
+            if (confirm('هل تريد إعادة توليد مفتاح API؟\nالمفاتيح القديمة ستتوقف عن العمل.')) {
+                alert('🔄 تم إعادة توليد مفتاح API بنجاح');
+            }
+        }
+
+        // ربط Google
+        function connectGoogle() {
+            alert('🔗 جاري الاتصال بحساب Google...');
+        }
+
+        // تحميل الإعدادات المحفوظة
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = JSON.parse(localStorage.getItem('finovate_settings') || '{}');
+            
+            if (saved.darkMode) document.getElementById('darkModeToggle').checked = true;
+            if (saved.compactMode) document.getElementById('compactModeToggle').checked = true;
+            if (saved.language) document.getElementById('languageSelect').value = saved.language;
+            if (saved.currency) document.getElementById('currencySelect').value = saved.currency;
+            if (saved.dateFormat) document.getElementById('dateFormatSelect').value = saved.dateFormat;
+            if (saved.rtl === false) document.getElementById('rtlToggle').checked = false;
+            if (saved.autoSave === false) document.getElementById('autoSaveToggle').checked = false;
+            if (saved.autoRefresh === false) document.getElementById('autoRefreshToggle').checked = false;
+            if (saved.confirmDelete === false) document.getElementById('confirmDeleteToggle').checked = false;
+            if (saved.cache === false) document.getElementById('cacheToggle').checked = false;
+            if (saved.sessionTimeout) document.getElementById('sessionTimeout').value = saved.sessionTimeout;
+            if (saved.companyName) document.getElementById('companyName').value = saved.companyName;
+            if (saved.emailNotif === false) document.getElementById('emailNotifToggle').checked = false;
+            if (saved.browserNotif === false) document.getElementById('browserNotifToggle').checked = false;
+            if (saved.autoBackup === false) document.getElementById('autoBackupToggle').checked = false;
+            
+            // تهيئة الترجمة
+            if (typeof initLocalization === 'function') {
+                initLocalization(saved.language || 'ar');
+            }
+        });
+
+        // إضافة أنماط الحركة
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+                to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translateX(-50%) translateY(0); opacity: 1; }
+                to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسطول - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>FINOVATE ERP X</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>لوحة التحكم</span>
+                </a>
+                
+                <div class="nav-section">العمليات</div>
+                <a href="sales.html" class="nav-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>المبيعات</span>
+                </a>
+                <a href="purchasing.html" class="nav-item">
+                    <i class="fas fa-truck"></i>
+                    <span>المشتريات</span>
+                </a>
+                <a href="inventory.html" class="nav-item">
+                    <i class="fas fa-boxes"></i>
+                    <span>المخزون</span>
+                </a>
+                <a href="manufacturing.html" class="nav-item">
+                    <i class="fas fa-industry"></i>
+                    <span>التصنيع</span>
+                </a>
+                
+                <div class="nav-section">الأطراف المعنية</div>
+                <a href="customers.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>العملاء</span>
+                </a>
+                <a href="suppliers.html" class="nav-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>الموردين</span>
+                </a>
+                
+                <div class="nav-section">المالية</div>
+                <a href="accounting.html" class="nav-item">
+                    <i class="fas fa-calculator"></i>
+                    <span>المحاسبة</span>
+                </a>
+                <a href="cash-bank.html" class="nav-item">
+                    <i class="fas fa-university"></i>
+                    <span>النقد والبنوك</span>
+                </a>
+                <a href="assets.html" class="nav-item">
+                    <i class="fas fa-building"></i>
+                    <span>الأصول</span>
+                </a>
+                <a href="budgeting.html" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>الميزانيات</span>
+                </a>
+                
+                <div class="nav-section">الإدارة</div>
+                <a href="people.html" class="nav-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>الموارد البشرية</span>
+                </a>
+                <a href="crm.html" class="nav-item">
+                    <i class="fas fa-heart"></i>
+                    <span>علاقات العملاء</span>
+                </a>
+                <a href="fleet.html" class="nav-item active">
+                    <i class="fas fa-car"></i>
+                    <span>الأسطول</span>
+                </a>
+                
+                <div class="nav-section">النظام</div>
+                <a href="reports.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>التقارير</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>التحليلات</span>
+                </a>
+                <a href="documents.html" class="nav-item">
+                    <i class="fas fa-folder"></i>
+                    <span>المستندات</span>
+                </a>
+                <a href="ai-settings.html" class="nav-item">
+                    <i class="fas fa-robot"></i>
+                    <span>إعدادات الذكاء الاصطناعي</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>الإعدادات</span>
+                </a>
+                
+                <div class="nav-section">الصيانة</div>
+                <a href="backup.html" class="nav-item">
+                    <i class="fas fa-database"></i>
+                    <span>النسخ الاحتياطي</span>
+                </a>
+                <a href="audit.html" class="nav-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>التدقيق</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- الشريط العلوي -->
+            <header class="top-header">
+                <div class="header-right">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>إدارة الأسطول</h1>
+                </div>
+                
+                <div class="header-left">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="بحث...">
+                    </div>
+                    
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">5</span>
+                    </div>
+                    
+                    <div class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=4F46E5&color=fff" alt="User">
+                        <span>مدير النظام</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- محتوى الصفحة -->
+            <div class="page-content">
+                <!-- الإحصائيات -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>إجمالي المركبات</h3>
+                            <p class="stat-number">45</p>
+                            <span class="stat-change positive"><i class="fas fa-arrow-up"></i> 3 هذا الشهر</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>في الخدمة</h3>
+                            <p class="stat-number">38</p>
+                            <span class="stat-change positive"><i class="fas fa-arrow-up"></i> 95% جاهزية</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>في الصيانة</h3>
+                            <p class="stat-number">5</p>
+                            <span class="stat-change negative"><i class="fas fa-arrow-down"></i> 2 أسبوعياً</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-gas-pump"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>متوسط استهلاك الوقود</h3>
+                            <p class="stat-number">12.5 L/100km</p>
+                            <span class="stat-change positive"><i class="fas fa-arrow-up"></i> 5% تحسن</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- التبويبات -->
+                <div class="tabs-container">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="vehicles">المركبات</button>
+                        <button class="tab-btn" data-tab="maintenance">الصيانة</button>
+                        <button class="tab-btn" data-tab="fuel">الوقود</button>
+                        <button class="tab-btn" data-tab="drivers">السائقين</button>
+                        <button class="tab-btn" data-tab="trips">الرحلات</button>
+                    </div>
+                    
+                    <!-- تبويب المركبات -->
+                    <div class="tab-content active" id="vehicles">
+                        <div class="table-header">
+                            <h2>قائمة المركبات</h2>
+                            <button class="btn-primary" onclick="openModal('addVehicleModal')">
+                                <i class="fas fa-plus"></i> مركبة جديدة
+                            </button>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم المركبة</th>
+                                        <th>النوع</th>
+                                        <th>الموديل</th>
+                                        <th>رقم اللوحة</th>
+                                        <th>سنة الصنع</th>
+                                        <th>الحالة</th>
+                                        <th>آخر صيانة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>VH-001</td>
+                                        <td>شاحنة</td>
+                                        <td>فورد F-150</td>
+                                        <td>أ ب ج 1234</td>
+                                        <td>2022</td>
+                                        <td><span class="status-badge active">نشطة</span></td>
+                                        <td>2024-01-10</td>
+                                        <td>
+                                            <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>VH-002</td>
+                                        <td>سيارة</td>
+                                        <td>تويوتا كامري</td>
+                                        <td>د ه و 5678</td>
+                                        <td>2023</td>
+                                        <td><span class="status-badge active">نشطة</span></td>
+                                        <td>2024-01-15</td>
+                                        <td>
+                                            <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>VH-003</td>
+                                        <td>شاحنة</td>
+                                        <td>مرسيدس أكتروس</td>
+                                        <td>ز ح ط 9012</td>
+                                        <td>2021</td>
+                                        <td><span class="status-badge maintenance">صيانة</span></td>
+                                        <td>2024-01-05</td>
+                                        <td>
+                                            <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- تبويب الصيانة -->
+                    <div class="tab-content" id="maintenance">
+                        <div class="table-header">
+                            <h2>جدول الصيانة</h2>
+                            <button class="btn-primary" onclick="openModal('addMaintenanceModal')">
+                                <i class="fas fa-plus"></i> طلب صيانة
+                            </button>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم الطلب</th>
+                                        <th>المركبة</th>
+                                        <th>نوع الصيانة</th>
+                                        <th>تاريخ الطلب</th>
+                                        <th>تاريخ الاستحقاق</th>
+                                        <th>الحالة</th>
+                                        <th>التكلفة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>MNT-001</td>
+                                        <td>VH-001</td>
+                                        <td>صيانة دورية</td>
+                                        <td>2024-01-10</td>
+                                        <td>2024-01-15</td>
+                                        <td><span class="status-badge completed">مكتمل</span></td>
+                                        <td>500 ر.س</td>
+                                        <td>
+                                            <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>MNT-002</td>
+                                        <td>VH-003</td>
+                                        <td>إصلاح عطب</td>
+                                        <td>2024-01-18</td>
+                                        <td>2024-01-25</td>
+                                        <td><span class="status-badge in-progress">قيد التنفيذ</span></td>
+                                        <td>1200 ر.س</td>
+                                        <td>
+                                            <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- تبويب الوقود -->
+                    <div class="tab-content" id="fuel">
+                        <div class="table-header">
+                            <h2>سجل استهلاك الوقود</h2>
+                            <button class="btn-primary" onclick="openModal('addFuelModal')">
+                                <i class="fas fa-plus"></i> تسجيل وقود
+                            </button>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم العملية</th>
+                                        <th>المركبة</th>
+                                        <th>تاريخ التعبئة</th>
+                                        <th>كمية الوقود</th>
+                                        <th>التكلفة</th>
+                                        <th>عداد الكيلومترات</th>
+                                        <th>محطة الوقود</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>FUEL-001</td>
+                                        <td>VH-001</td>
+                                        <td>2024-01-20</td>
+                                        <td>50 لتر</td>
+                                        <td>175 ر.س</td>
+                                        <td>45,230 كم</td>
+                                        <td>أرامكو</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FUEL-002</td>
+                                        <td>VH-002</td>
+                                        <td>2024-01-21</td>
+                                        <td>40 لتر</td>
+                                        <td>140 ر.س</td>
+                                        <td>23,450 كم</td>
+                                        <td>سابك</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- تبويب السائقين -->
+                    <div class="tab-content" id="drivers">
+                        <div class="table-header">
+                            <h2>السائقين المعتمدين</h2>
+                            <button class="btn-primary" onclick="openModal('addDriverModal')">
+                                <i class="fas fa-plus"></i> سائق جديد
+                            </button>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم السائق</th>
+                                        <th>الاسم</th>
+                                        <th>رخصة القيادة</th>
+                                        <th>نوع الرخصة</th>
+                                        <th>تاريخ الانتهاء</th>
+                                        <th>المركبة المخصصة</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>DR-001</td>
+                                        <td>أحمد محمد</td>
+                                        <td>A1234567</td>
+                                        <td>نقل ثقيل</td>
+                                        <td>2025-06-15</td>
+                                        <td>VH-001</td>
+                                        <td><span class="status-badge active">نشط</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>DR-002</td>
+                                        <td>خالد علي</td>
+                                        <td>B7654321</td>
+                                        <td>خاص</td>
+                                        <td>2025-08-20</td>
+                                        <td>VH-002</td>
+                                        <td><span class="status-badge active">نشط</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- تبويب الرحلات -->
+                    <div class="tab-content" id="trips">
+                        <div class="table-header">
+                            <h2>سجل الرحلات</h2>
+                            <button class="btn-primary" onclick="openModal('addTripModal')">
+                                <i class="fas fa-plus"></i> رحلة جديدة
+                            </button>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم الرحلة</th>
+                                        <th>المركبة</th>
+                                        <th>السائق</th>
+                                        <th>من</th>
+                                        <th>إلى</th>
+                                        <th>تاريخ البدء</th>
+                                        <th>تاريخ الانتهاء</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>TRP-001</td>
+                                        <td>VH-001</td>
+                                        <td>أحمد محمد</td>
+                                        <td>الرياض</td>
+                                        <td>جدة</td>
+                                        <td>2024-01-20 08:00</td>
+                                        <td>2024-01-20 18:00</td>
+                                        <td><span class="status-badge completed">مكتمل</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TRP-002</td>
+                                        <td>VH-002</td>
+                                        <td>خالد علي</td>
+                                        <td>الدمام</td>
+                                        <td>الجبيل</td>
+                                        <td>2024-01-22 09:00</td>
+                                        <td>-</td>
+                                        <td><span class="status-badge in-progress">قيد التنفيذ</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- نافذة إضافة مركبة -->
+    <div class="modal" id="addVehicleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إضافة مركبة جديدة</h2>
+                <button class="close-btn" onclick="closeModal('addVehicleModal')">&times;</button>
+            </div>
+            <form>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>نوع المركبة</label>
+                        <select required>
+                            <option value="">اختر النوع...</option>
+                            <option value="car">سيارة</option>
+                            <option value="truck">شاحنة</option>
+                            <option value="van">فان</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الموديل</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>رقم اللوحة</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>سنة الصنع</label>
+                        <input type="number" required min="2000" max="2024">
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهيكل (VIN)</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>اللون</label>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('addVehicleModal')">إلغاء</button>
+                    <button type="submit" class="btn-primary">إضافة المركبة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/fleet.js"></script>
+</body>
+</html>
