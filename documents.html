@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المستندات - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>FINOVATE ERP X</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-home"></i><span>لوحة التحكم</span></a>
+                <a href="sales.html"><i class="fas fa-shopping-cart"></i><span>المبيعات</span></a>
+                <a href="purchasing.html"><i class="fas fa-truck-loading"></i><span>المشتريات</span></a>
+                <a href="inventory.html"><i class="fas fa-boxes"></i><span>المخزون</span></a>
+                <a href="manufacturing.html"><i class="fas fa-industry"></i><span>التصنيع</span></a>
+                <a href="crm.html"><i class="fas fa-handshake"></i><span>علاقات العملاء</span></a>
+                <a href="accounting.html"><i class="fas fa-calculator"></i><span>المحاسبة</span></a>
+                <a href="cash-bank.html"><i class="fas fa-university"></i><span>النقد والبنوك</span></a>
+                <a href="assets.html"><i class="fas fa-building"></i><span>الأصول</span></a>
+                <a href="people.html"><i class="fas fa-users"></i><span>الموارد البشرية</span></a>
+                <a href="fleet.html"><i class="fas fa-shipping-fast"></i><span>الأسطول</span></a>
+                <a href="projects.html"><i class="fas fa-project-diagram"></i><span>المشاريع</span></a>
+                <a href="budgeting.html"><i class="fas fa-chart-pie"></i><span>الميزانيات</span></a>
+                <a href="reports.html"><i class="fas fa-file-alt"></i><span>التقارير</span></a>
+                <a href="analytics.html"><i class="fas fa-chart-line"></i><span>التحليلات</span></a>
+                <a href="documents.html" class="active"><i class="fas fa-folder-open"></i><span>المستندات</span></a>
+                <a href="backup.html"><i class="fas fa-database"></i><span>النسخ الاحتياطي</span></a>
+                <a href="audit.html"><i class="fas fa-search-dollar"></i><span>التدقيق</span></a>
+                <a href="ai-settings.html"><i class="fas fa-robot"></i><span>إعدادات الذكاء الاصطناعي</span></a>
+                <a href="settings.html"><i class="fas fa-cog"></i><span>الإعدادات</span></a>
+                <a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i><span>تسجيل الخروج</span></a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1><i class="fas fa-folder-open"></i> إدارة المستندات</h1>
+                <div class="user-info">
+                    <span>مرحباً، المدير العام</span>
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=4F46E5&color=fff" alt="User">
+                </div>
+            </header>
+
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-file"></i></div>
+                    <div class="stat-details">
+                        <h3>1,250</h3>
+                        <p>إجمالي المستندات</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-folder"></i></div>
+                    <div class="stat-details">
+                        <h3>45</h3>
+                        <p>مجلدات</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-upload"></i></div>
+                    <div class="stat-details">
+                        <h3>28</h3>
+                        <p>تم رفعها هذا الأسبوع</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-share-alt"></i></div>
+                    <div class="stat-details">
+                        <h3>156</h3>
+                        <p>مستند مشترك</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tabs-section">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="all">جميع المستندات</button>
+                    <button class="tab-btn" data-tab="folders">المجلدات</button>
+                    <button class="tab-btn" data-tab="recent">المستندات الحديثة</button>
+                    <button class="tab-btn" data-tab="shared">المشتركة</button>
+                </div>
+
+                <div class="tabs-content">
+                    <div class="tab-pane active" id="all">
+                        <div class="table-header">
+                            <h2>مكتبة المستندات</h2>
+                            <button class="btn-primary" onclick="openModal('uploadModal')">
+                                <i class="fas fa-upload"></i> رفع مستند
+                            </button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم المستند</th>
+                                    <th>النوع</th>
+                                    <th>الحجم</th>
+                                    <th>تاريخ الرفع</th>
+                                    <th>المالك</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fas fa-file-pdf"></i> عقد_العميل_001.pdf</td>
+                                    <td>PDF</td>
+                                    <td>2.5 MB</td>
+                                    <td>2024-01-20</td>
+                                    <td>أحمد محمد</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-file-excel"></i> تقرير_المبيعات.xlsx</td>
+                                    <td>Excel</td>
+                                    <td>1.2 MB</td>
+                                    <td>2024-01-19</td>
+                                    <td>سارة أحمد</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="folders">
+                        <div class="table-header">
+                            <h2>هيكل المجلدات</h2>
+                            <button class="btn-primary"><i class="fas fa-plus"></i> مجلد جديد</button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم المجلد</th>
+                                    <th>عدد المستندات</th>
+                                    <th>آخر تحديث</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fas fa-folder"></i> العقود</td>
+                                    <td>45 مستند</td>
+                                    <td>2024-01-20</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="recent">
+                        <div class="table-header">
+                            <h2>المستندات الحديثة</h2>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>المستند</th>
+                                    <th>تاريخ التعديل</th>
+                                    <th>المعدل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>عقد_العميل_001.pdf</td>
+                                    <td>2024-01-20 14:30</td>
+                                    <td>أحمد محمد</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="shared">
+                        <div class="table-header">
+                            <h2>المستندات المشتركة</h2>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>المستند</th>
+                                    <th>شارك مع</th>
+                                    <th>الصلاحيات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>تقرير_المبيعات.xlsx</td>
+                                    <td>فريق المبيعات</td>
+                                    <td>قراءة فقط</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('uploadModal')">&times;</span>
+            <h2><i class="fas fa-upload"></i> رفع مستند جديد</h2>
+            <form>
+                <div class="form-group">
+                    <label>اختر الملف</label>
+                    <input type="file" required>
+                </div>
+                <div class="form-group">
+                    <label>المجلد</label>
+                    <select required>
+                        <option value="">اختر مجلداً...</option>
+                        <option>العقود</option>
+                        <option>الفواتير</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">رفع المستند</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal('uploadModal')">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        function openModal(modalId) { document.getElementById(modalId).style.display = 'block'; }
+        function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+        window.onclick = function(event) { if (event.target.classList.contains('modal')) { event.target.style.display = 'none'; } }
+    </script>
+</body>
+</html>

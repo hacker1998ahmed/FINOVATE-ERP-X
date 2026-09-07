@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحليلات - FINOVATE ERP X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo"><i class="fas fa-brain"></i><span>FINOVATE ERP X</span></div>
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-home"></i><span>لوحة التحكم</span></a>
+                <a href="sales.html"><i class="fas fa-shopping-cart"></i><span>المبيعات</span></a>
+                <a href="purchasing.html"><i class="fas fa-truck-loading"></i><span>المشتريات</span></a>
+                <a href="inventory.html"><i class="fas fa-boxes"></i><span>المخزون</span></a>
+                <a href="manufacturing.html"><i class="fas fa-industry"></i><span>التصنيع</span></a>
+                <a href="crm.html"><i class="fas fa-handshake"></i><span>علاقات العملاء</span></a>
+                <a href="accounting.html"><i class="fas fa-calculator"></i><span>المحاسبة</span></a>
+                <a href="cash-bank.html"><i class="fas fa-university"></i><span>النقد والبنوك</span></a>
+                <a href="assets.html"><i class="fas fa-building"></i><span>الأصول</span></a>
+                <a href="people.html"><i class="fas fa-users"></i><span>الموارد البشرية</span></a>
+                <a href="fleet.html"><i class="fas fa-shipping-fast"></i><span>الأسطول</span></a>
+                <a href="projects.html"><i class="fas fa-project-diagram"></i><span>المشاريع</span></a>
+                <a href="budgeting.html"><i class="fas fa-chart-pie"></i><span>الميزانيات</span></a>
+                <a href="reports.html"><i class="fas fa-file-alt"></i><span>التقارير</span></a>
+                <a href="analytics.html" class="active"><i class="fas fa-chart-line"></i><span>التحليلات</span></a>
+                <a href="documents.html"><i class="fas fa-folder-open"></i><span>المستندات</span></a>
+                <a href="backup.html"><i class="fas fa-database"></i><span>النسخ الاحتياطي</span></a>
+                <a href="audit.html"><i class="fas fa-search-dollar"></i><span>التدقيق</span></a>
+                <a href="ai-settings.html"><i class="fas fa-robot"></i><span>إعدادات الذكاء الاصطناعي</span></a>
+                <a href="settings.html"><i class="fas fa-cog"></i><span>الإعدادات</span></a>
+                <a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i><span>تسجيل الخروج</span></a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1><i class="fas fa-chart-line"></i> التحليلات المتقدمة</h1>
+                <div class="user-info"><span>مرحباً، المدير العام</span><img src="https://ui-avatars.com/api/?name=Admin&background=4F46E5&color=fff" alt="User"></div>
+            </header>
+
+            <section class="stats-grid">
+                <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-chart-bar"></i></div><div class="stat-details"><h3>+15%</h3><p>نمو المبيعات</p></div></div>
+                <div class="stat-card"><div class="stat-icon green"><i class="fas fa-arrow-up"></i></div><div class="stat-details"><h3>+8%</h3><p>زيادة الأرباح</p></div></div>
+                <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-percentage"></i></div><div class="stat-details"><h3>92%</h3><p>رضا العملاء</p></div></div>
+                <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-users"></i></div><div class="stat-details"><h3>1,250</h3><p>عميل جديد</p></div></div>
+            </section>
+
+            <section class="tabs-section">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="sales-analytics">تحليل المبيعات</button>
+                    <button class="tab-btn" data-tab="financial">التحليل المالي</button>
+                    <button class="tab-btn" data-tab="customer">تحليل العملاء</button>
+                    <button class="tab-btn" data-tab="performance">الأداء</button>
+                </div>
+                <div class="tabs-content">
+                    <div class="tab-pane active" id="sales-analytics">
+                        <div class="table-header"><h2>تحليل المبيعات</h2></div>
+                        <div class="chart-placeholder"><i class="fas fa-chart-area"></i><p>رسم بياني لنمو المبيعات الشهري</p></div>
+                        <table class="data-table">
+                            <thead><tr><th>الشهر</th><th>المبيعات</th><th>النمو</th><th>الهدف</th></tr></thead>
+                            <tbody>
+                                <tr><td>يناير 2024</td><td>450,000 ريال</td><td><span class="status-badge status-success">+12%</span></td><td>400,000 ريال</td></tr>
+                                <tr><td>ديسمبر 2023</td><td>400,000 ريال</td><td><span class="status-badge status-success">+8%</span></td><td>380,000 ريال</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="financial"><div class="table-header"><h2>التحليل المالي</h2></div><div class="chart-placeholder"><i class="fas fa-chart-pie"></i><p>توزيع النفقات والإيرادات</p></div></div>
+                    <div class="tab-pane" id="customer"><div class="table-header"><h2>تحليل العملاء</h2></div><table class="data-table"><thead><tr><th>شريحة العملاء</th><th>العدد</th><th>نسبة النمو</th></tr></thead><tbody><tr><td>عملاء جدد</td><td>125</td><td>+15%</td></tr><tr><td>عملاء نشطين</td><td>850</td><td>+5%</td></tr></tbody></table></div>
+                    <div class="tab-pane" id="performance"><div class="table-header"><h2>تحليل الأداء</h2></div><table class="data-table"><thead><tr><th>المؤشر</th><th>القيمة الحالية</th><th>الهدف</th><th>الإنجاز</th></tr></thead><tbody><tr><td>معدل التحويل</td><td>3.5%</td><td>4%</td><td>87.5%</td></tr></tbody></table></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
